@@ -18,7 +18,7 @@ class Book(models.Model):
     price = models.IntegerField()
     #image field
     uploaded_by = models.ForeignKey(User,related_name="book_user",on_delete=CASCADE)
-    selling_method = models.CharField(max_length=100)
+    
     to_exchange_with = models.ManyToManyField(Category,related_name="exchange_category")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -29,6 +29,14 @@ class Comment(models.Model):
     user_comment = models.ForeignKey(User,related_name="comment_by_user",on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Selling_method(models.Model):
+    method = models.CharField(max_length = 255)
+    book = models.ForeignKey(Book, related_name="method", on_delete=CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 def get_books():
     return Book.objects.all()
