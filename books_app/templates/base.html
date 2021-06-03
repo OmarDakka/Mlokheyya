@@ -12,8 +12,6 @@
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
   <body>
-    {% block content %}
-    {% endblock %}
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid d-flex flex-reverse-row">
         <form class="d-flex">
@@ -24,14 +22,14 @@
     </nav> 
 		<div class="wrapper d-flex align-items-stretch">     
 			<nav id="sidebar">          
-				<div class="custom-menu">
-					<button type="button" id="sidebarCollapse" class="btn btn-primary fa-bars">
-	        </button>
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary fa-bars">
+          </button>
         </div>
         <!-- <img src="{% static 'images/image.jpg' %}" /> -->
 	  		<div class="img bg-wrap text-center py-4" style="background-image: url(static/images/bg_2.jpg);">
 	  			<div class="user-logo">
-	  				<div class="img" style="background-image: url(static/images/logo.jpg);"></div>
+            <div class="img" style="background-image: url(static/images/logo.jpg);"></div>
 	  				<h3>User Name</h3>
 	  			</div>
 	  		</div>
@@ -59,19 +57,21 @@
           </li>
         </ul>
     	</nav>
-        <!-- Page Content  -->
+      {% block content %}
+      <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
         <h2 class="mb-4">Content Title</h2>
         <p>CONTENT</p>
       </div>
-	</div>
+      {% endblock %}
+    </div>
     <nav class="nav">
-        <a class="nav-link active" aria-current="page" href="#">About Us</a>
+      <a class="nav-link active" aria-current="page" href="#">About Us</a>
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Contact Us</a>
       </nav>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/popper.js' %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>
