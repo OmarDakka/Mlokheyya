@@ -10,9 +10,25 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Document</title>
+    <style>
+        .soringtype{
+
+        }
+    </style>
 </head>
 <body>
     {% block content %}
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <h3>Category{name}</h3>
+        <img src="#" alt="Categoryimg">
+        <div>
+            <span class="sortingtype"> Sorting By</span> 
+            <span class="sortingtype"> Sorting By</span>
+            <span class="sortingtype"> Sorting By</span>
+            <span class="sortingtype"> Sorting By</span>
+            <span class="sortingtype"> Sorting By</span>
+        </div>
+    </div>
     {% endblock %}
 </body>
 </html>
