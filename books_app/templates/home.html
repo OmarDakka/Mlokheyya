@@ -1,22 +1,94 @@
-{% extends 'base.html' %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+  	<title>Home Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
+    <!-- {% load static %} -->
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}">  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Document</title>
-</head>
-<body>
-    {% block content %}
-    <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Content Title</h2>
-        <p>Adel</p>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid d-flex flex-reverse-row">
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav> 
+		<div class="wrapper d-flex align-items-stretch">     
+			<nav id="sidebar">          
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary fa-bars">
+          </button>
+        </div>
+        <!-- <img src="{% static 'images/image.jpg' %}" /> -->
+	  		<div class="img bg-wrap text-center py-4" style="background-image: url(static/images/bg_2.jpg);">
+	  			<div class="user-logo">
+            <div class="img" style="background-image: url(static/images/logo.jpg);"></div>
+	  				<h3>User Name</h3>
+	  			</div>
+	  		</div>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="#"><span class="fa fa-home mr-3"></span> Category 1</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-download mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Category 2</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-gift mr-3"></span> Category 3</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-trophy mr-3"></span> Category 4</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-cog mr-3"></span> Category 5</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-support mr-3"></span> Category 6</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-sign-out mr-3"></span> Category 7</a>
+          </li>
+        </ul>
+    	</nav>
+      <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static 'images/slideshow1.jpeg' %}" class="d-block w-100" alt="pic1">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'images/slideshow2.jpeg' %}" class="d-block w-100" alt="pic2">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'images/slideshow3.jpeg' %}" class="d-block w-100" alt="pic3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+      </div>
     </div>
-    {% endblock %}
-</body>
+    <nav class="nav">
+      <a class="nav-link active" aria-current="page" href="#">About Us</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Contact Us</a>
+      </nav>
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/popper.js' %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>
