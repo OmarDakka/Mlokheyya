@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    return render (request,'About_us.html')
+    return render (request,'home.html')
 
 def category(request):
     return render (request,'Category.html')
@@ -17,5 +17,5 @@ def user_page(request):
 
 
 def home(request):
-    return render (request,'home.html')
+    return render (request,'About_us.html')
 
