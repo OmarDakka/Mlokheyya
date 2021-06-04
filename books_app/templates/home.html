@@ -28,15 +28,19 @@
 </head>
   
 <body>
+  {% load static %}
 <div class="wrapper">
   <!-- Sidebar  -->
   <nav id="sidebar">
       <div class="sidebar-header">
           <h3>Bookify</h3>
       </div>
-
       <ul class="list-unstyled components">
-          <p>Welcome User</p>
+	  			<div class="user-logo">
+	  				<img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+	  				<h4>User Name</h4>
+	  			</div>
+          <!-- DATA from DB just for testing -->
           <li class="active">
               <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
               <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -65,7 +69,7 @@
               <a href="#">About us</a>
           </li>
           <li>
-              <a href="#">Create an account</a>
+              <a href="#">Log in/Create an account</a>
           </li>
       </ul>
 
@@ -74,17 +78,14 @@
   
   <!-- Page Content  -->
   <div id="content">
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-
             <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
               <i class="gg-menu"></i>
             </button>
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <i class="gg-menu"></i>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav ml-auto">
                     <li>
@@ -95,11 +96,70 @@
             </div>
         </div>
     </nav>
-    
-    CONTENEETNTTNNTNTNT HEEEERREEEEEEEE
 
-  </div>
+    <div class="quote">
+    <h4>"If you don't like to read, you haven't found the right book." -J.K. Rowling</h4>
+    </div>
+
+      <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="{% static 'images/slideshow6.jpg' %}" class="d-block w-100" alt="pic1">
+          </div>
+          <div class="carousel-item">
+              <img src="{% static 'images/slideshow7.jpg' %}" class="d-block w-100" alt="pic2">
+          </div>
+          <div class="carousel-item">
+              <img src="{% static 'images/slideshow8.jpg' %}" class="d-block w-100" alt="pic3">
+          </div>
+          <div class="carousel-item">
+              <img src="{% static 'images/slideshow9.jpg' %}" class="d-block w-100" alt="pic4">
+          </div>
+          <div class="carousel-item">
+              <img src="{% static 'images/slideshow10.jpg' %}" class="d-block w-100" alt="pic5">
+          </div>
+          <div class="carousel-item">
+              <img src="{% static 'images/slideshow11.jpg' %}" class="d-block w-100" alt="pic6">
+          </div>
+        </div>
+      </div>
+
+      <div class="categ">
+        <h4>Categories</h4>
+      </div>
+      <div class="categories_pics">
+        <!-- DATA from DB just for testing -->
+        <div class="row">
+          <div class="column">
+            <a href="category"><img class="rounded" src="{% static 'images/Sci-Fi.jpeg' %}" alt="Snow" style="width:100%"></a>
+            <p class='hide'>Science-Fiction</p>
+          </div>
+          <div class="column">
+            <a href="category"><img class="rounded" src="{% static 'images/Mystery.jpeg' %}" alt="Forest" style="width:100%"></a>
+            <p class='hide'>Mystery</p>
+          </div>
+          <div class="column">
+            <a href="category"><img class="rounded" src="{% static 'images/Fiction.jpeg' %}" alt="Mountains" style="width:100%"></a>
+            <p class='hide'>Fiction</p>
+          </div>
+          <div class="column">
+            <a href="category"><img class="rounded" src="{% static 'images/bg_1.jpg' %}" alt="Snow" style="width:100%"></a>
+            <p class='hide'>Adventure</p>
+          </div>
+          <div class="column">
+            <a href="category"><img class="rounded" src="{% static 'images/Romance.jpeg' %}" alt="Forest" style="width:100%"></a>
+            <p class='hide'>Romance</p>
+          </div>
+          <div class="column">
+            <a href="category"><img class="rounded" src="{% static 'images/bg_1.jpg' %}" alt="Snow" style="width:100%"></a>
+            <p class='hide'>Adventure</p>
+          </div>
+          <div class="column">
+            <a href="category"><img class="rounded" src="{% static 'images/Romance.jpeg' %}" alt="Forest" style="width:100%"></a>
+            <p class='hide'>Romance</p>
+          </div>
+        </div>
+      </div>
 </div>
 </body>
-
 </html>

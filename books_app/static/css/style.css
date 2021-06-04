@@ -141,6 +141,54 @@ a.article:hover {
     color: #fff !important;
 }
 
+.user-logo h4{
+    text-align: center;
+    padding:.5em;
+}
+/* ---------------------------------------------------
+    Home Page Style
+----------------------------------------------------- */
+
+.carousel-inner{
+    width:100%;
+    max-height: 350px !important;
+}
+
+.quote{
+    text-align: center;
+    margin-bottom:4%;
+}
+
+.categ{
+    text-align: center;
+    margin:3%;
+}
+
+.categories_pics{
+    margin-top: 1.5em;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2.5em;
+
+}
+  
+.column {
+    padding: 5px;
+    margin-left: 1.5em;
+}
+
+
+.column img{
+    max-width:280px;
+}
+
+.hide{
+    display:none;
+}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
