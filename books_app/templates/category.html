@@ -1,108 +1,18 @@
-<!doctype html>
+{% extends 'base.html' %}
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-  	<title>Home Page</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link href='https://css.gg/menu.css' rel='stylesheet'>
-	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/main.js' %}"></script>
-    <style>
-      .push-down {
-        margin-bottom: 10px;
-      }
-  
-      .background {
-        background-image: linear-gradient(#f09fb9 , #ecc8d3);
-      }
-
-      .buttonStretch {
-        height: 33px;
-      }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
 </head>
-  
 <body>
-<div class="wrapper">
-  <!-- Sidebar  -->
-  <nav id="sidebar">
-      <div class="sidebar-header">
-          <h3>Bookify</h3>
-      </div>
-
-      <ul class="list-unstyled components">
-        <div class="user-logo">
-          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
-          <h4>User Name</h4>
-        </div>
-          <li class="active">
-              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                  <li>
-                      <a href="#">Category 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 2</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 3</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 4</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 5</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <a href="#">Your profile</a>
-          </li>
-        
-          <li>
-              <a href="#">About us</a>
-          </li>
-          <li>
-              <a href="#">Log in/Create an account</a>
-          </li>
-      </ul>
-
-  </nav>
-
-  
-  <!-- Page Content  -->
-  <div id="content">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-
-            <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
-              <i class="gg-menu"></i>
-            </button>
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <i class="gg-menu"></i>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
-                    <li>
-                     <input type="search" class="">
-                     <button type="submit" class="btn btn-sm btn-primary ">Search</button> 
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
-    CONTENEETNTTNNTNTNT HEEEERREEEEEEEE
-
-  </div>
-</div>
+    {% block content %}
+    {% endblock %}
 </body>
-
 </html>
