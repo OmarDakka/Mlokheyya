@@ -9,7 +9,10 @@ urlpatterns = [
     path('add_book',views.add_book),
     path('book/<int:book_id>', views.book),
     path('category/<int:category_id>',views.category),
-    path('about_us',views.about_us)
+    path('about_us',views.about_us),
+    path('update_book/<int:book_id>',views.update_book_data),
+    path('buy_book/<int:book_id>',views.buy_book),
+    path('/books/exchange_book/<int:book_id>',views.exchange_book),
 
 ]
 
