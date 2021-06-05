@@ -35,30 +35,21 @@
     }
     .info_p{
         height: 11%;
-
-        border-top: black solid  1px;
-
         padding: 0.2rem;
+        color: black;
     }
     .last_p{
         height: 67%;
-        border-top: black solid  1px;
+        color: black;
+
     }
-    .function_p{
-        height: 50%;
-        border-left:solid 1px black ;
-        border-bottom: black solid 1px;
-    }
+
 
     .book_div{
         margin: 0.5rem 0px;
         width: 34rem;
-        border: solid black 1px;
-        border-top: none;
+        border: solid black 2px;
 
-    }
-    .sortingtype{
-      border: solid black 2px;
     }
     .label {
       margin-bottom: 0rem;
@@ -77,6 +68,8 @@
     }
     .bookimg{
       width: 12rem;
+      height: 20rem;
+
     }
     .book_info{
       width: 22rem;
@@ -90,6 +83,15 @@
     .bookify-color {
         color: #6d7fcc;
       }
+      .info_label{
+        color: black;
+        font-weight: bold;
+      }
+      /* .height_dev{
+        height: 20rem;
+
+
+      } */
     /* .method {
       width: 6rem;
       border-top: solid black 1px;
@@ -172,93 +174,42 @@
       <!-- </div> -->
   </nav>
     
-    <h3>Category{name}</h3>
-    <img class="catimg" src="{% static 'images/bg_1.jpg' %}" />
-        <form action=""  class="btn-group sortingbar" role="group" aria-label="Basic example">
-            <label for="" class="label btn btn-secondary "> Sort by </label>
-            <button type="submit" class="label btn btn-secondary ">Price</button>
-            <select  class="label btn btn-secondary  " id="inlineFormCustomSelect">
-                <option selected>Location</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <button type="submit" class="label btn btn-secondary"> A - Z </button>
-            <button type="submit" class=" label btn btn-secondary"> Z - A </button>
-        </form>
-        <div class="d-flex flex-wrap books_main">
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
-          <div class="d-flex book_div" >
-            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
-              <div class="d-flex flex-column book_info">
-                  <p class="p-2 info_p">Title</p>
-                  <p class="p-2 info_p" > Location </p>
-                  <p class="p-2 info_p" > Categories</p>
-                  <p class="p-2 last_p" >Description</p>
-              </div>
-          </div>
+  <h3>{{current_category.name}}</h3>
+  <img class="catimg" src="{{ current_category.image.url }}" />
+      <form action="/books/category/sort/{{current_category.id}}" method="POST"  class="btn-group sortingbar" role="group" aria-label="Basic example">
+        {% csrf_token %}
+          <label for="" class="label btn btn-secondary "> Sort by </label>
+          <select name="location" class="label btn btn-secondary  " id="inlineFormCustomSelect">
+            <option selected>Location</option>
+            <option value="Ramallah">Ramallah</option>
+            <option value="Jerusalem">Jerusalem</option>
+            <option value="Nablus">Nablus</option>
+            <option value="Hebron">Hebron</option>
+            <option value="Tulkarem">Tulkarem</option>
+            <option value="Jericho">Jericho</option>
+            <option value="Jenin">Jenin</option>
+        </select>
+          <button name="button" value="price" type="submit" class="label btn btn-secondary ">Price</button>
+
+          <button name="button" value="a-z" type="submit" class="label btn btn-secondary"> A - Z </button>
+          <button name="button" value="z-a" type="submit" class=" label btn btn-secondary"> Z - A </button>
+      </form>
+      <div class="d-flex flex-wrap books_main">
+        {% for book in books %}
+        <div class="d-flex book_div" >
+          <a href="#"> <img class="bookimg" src="{% static 'images/bg_1.jpg' %}" /> </a>
+          <!-- <div class="height_dev">
+
+        </div> -->
+            <div class="d-flex flex-column book_info">
+                <p class="p-2 info_p"><span class="info_label">Title:</span> {{book.title}}</p>
+                <p class="p-2 info_p" ><span class="info_label">Location:</span> {{book.location}} </p>
+                <p class="p-2 info_p" ><span class="info_label">Categories:</span> {{book.book_category.name}}</p>
+                <p class="p-2 last_p" ><span class="info_label">Description:</span><br> {{book.description}}</p>
+            </div>
+        </div>
+        {% endfor%}
+
           
         </div>
 
