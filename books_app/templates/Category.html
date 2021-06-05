@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href='https://css.gg/menu.css' rel='stylesheet'>
+	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+    <style>
+      .catimg{
+        width: 20rem;
+        margin: 0px auto;
+        display: block;
+      }
+      .push-down {
+        margin-bottom: 10px;
+      }
+  
+      .background {
+        background-image: linear-gradient(#f09fb9 , #ecc8d3);
+      }
+
+      .buttonStretch {
+        height: 33px;
+      }
+      
+    p{
+        margin-bottom: 0rem;
+    }
+    .info_p{
+        height: 11%;
+
+        border-top: black solid  1px;
+
+        padding: 0.2rem;
+    }
+    .last_p{
+        height: 67%;
+        border-top: black solid  1px;
+    }
+    .function_p{
+        height: 50%;
+        border-left:solid 1px black ;
+        border-bottom: black solid 1px;
+    }
+
+    .book_div{
+        margin: 0.5rem 0px;
+        width: 34rem;
+        border: solid black 1px;
+        border-top: none;
+
+    }
+    .sortingtype{
+      border: solid black 2px;
+    }
+    .label {
+      margin-bottom: 0rem;
+      display: inline-block;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      width: 10%;
+      background-color: none;
+          }
+    .sortingbar{
+      margin: 0.4rem auto;
+      display: flex;
+      justify-content: center;
+
+    }
+    .bookimg{
+      width: 12rem;
+    }
+    .book_info{
+      width: 22rem;
+    }
+    .books_main{
+      justify-content: space-between;
+      width: 85%;
+      margin: 0px auto;
+    }
+
+    .bookify-color {
+        color: #6d7fcc;
+      }
+    /* .method {
+      width: 6rem;
+      border-top: solid black 1px;
+    } */
+    </style>
+</head>
+<body>
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+      <div class="sidebar-header">
+          <h3>Bookify</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+          <p>Welcome User</p>
+          <li class="active">
+              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                  <li>
+                      <a href="#">Category 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Category 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Category 3</a>
+                  </li>
+                  <li>
+                      <a href="#">Category 4</a>
+                  </li>
+                  <li>
+                      <a href="#">Category 5</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#">Your profile</a>
+          </li>
+        
+          <li>
+              <a href="#">About us</a>
+          </li>
+          <li>
+              <a href="#">Create an account</a>
+          </li>
+      </ul>
+
+  </nav>
+
+  
+  <!-- Page Content  -->
+  <div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+      <!-- <div class="d-flex justify-content-between"> -->
+
+          <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
+            <i class="gg-menu"></i>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="gg-menu"></i>
+          </button>
+          <h2 class="bookify-color">Bookify</h2>
+           <div>
+                   <input type="search" class="search-width">
+                   <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
+           </div>
+          
+         
+      <!-- </div> -->
+  </nav>
+    
+    <h3>Category{name}</h3>
+    <img class="catimg" src="{% static 'images/bg_1.jpg' %}" />
+        <form action=""  class="btn-group sortingbar" role="group" aria-label="Basic example">
+            <label for="" class="label btn btn-secondary "> Sort by </label>
+            <button type="submit" class="label btn btn-secondary ">Price</button>
+            <select  class="label btn btn-secondary  " id="inlineFormCustomSelect">
+                <option selected>Location</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <button type="submit" class="label btn btn-secondary"> A - Z </button>
+            <button type="submit" class=" label btn btn-secondary"> Z - A </button>
+        </form>
+        <div class="d-flex flex-wrap books_main">
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          <div class="d-flex book_div" >
+            <img class="bookimg" src="{% static 'images/the last wish.jpg' %}" />
+              <div class="d-flex flex-column book_info">
+                  <p class="p-2 info_p">Title</p>
+                  <p class="p-2 info_p" > Location </p>
+                  <p class="p-2 info_p" > Categories</p>
+                  <p class="p-2 last_p" >Description</p>
+              </div>
+          </div>
+          
+        </div>
+
+  </div>
+</div>
+</body>
+</html>
