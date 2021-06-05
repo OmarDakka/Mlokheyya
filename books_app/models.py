@@ -9,7 +9,7 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     description = models.TextField()
-    #image field
+    image = models.ImageField(upload_to='images/' , default="default.jpg")
 
 
 class Book(models.Model):
@@ -18,7 +18,7 @@ class Book(models.Model):
     location = models.CharField(max_length=255)
     book_category = models.ManyToManyField(Category,related_name="category_books")
     price = models.IntegerField()
-    #image field
+    image = models.ImageField(upload_to='images/' , default="default.jpg")
     uploaded_by = models.ForeignKey(User,related_name="book_user",on_delete=CASCADE)
     to_exchange_with = models.ManyToManyField(Category,related_name="exchange_category")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,4 +44,11 @@ def get_books():
 
 def get_book_by_id(book_id):
     return Book.objects.get(id=book_id)
+
+def get_all_categories():
+    return Category.objects.all()
+
+def get_category_by_id(id):
+    return Category.objects.get(id=id)
+
 

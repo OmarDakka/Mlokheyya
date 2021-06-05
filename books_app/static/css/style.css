@@ -184,7 +184,11 @@ a.article:hover {
 }
 
 .column img {
-    max-width: 280px;
+    max-width: 15rem;
+}
+
+.column p{
+    text-align: center;
 }
 
 .hide {

@@ -6,6 +6,8 @@ import bcrypt
 
 
 def index(request):
+    if 'id' in request.session:
+        return redirect('/books')
     return render(request, "login.html")
 
 

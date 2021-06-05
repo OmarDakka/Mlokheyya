@@ -40,37 +40,36 @@
           <h3>Bookify</h3>
       </div>
       <ul class="list-unstyled components">
+          {% if 'id' in request.session %}
 	  			<div class="user-logo">
 	  				<img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
-	  				<h4>User Name</h4>
+            <!-- we will change it to user image -->
+	  				<h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
 	  			</div>
+          {% else %}
+          <div class="user-logo">
+	  				<img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+            <!-- we will change it to user image -->
+	  				<h4>User Name (log in)</h4>
+	  			</div>
+          {% endif %}
           <!-- DATA from DB just for testing -->
           <li class="active">
               <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
               <ul class="collapse list-unstyled" id="homeSubmenu">
                   <li>
-                      <a href="#">Category 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 2</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 3</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 4</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 5</a>
+                    {% for category in all_categories %}
+                      <a href="category/{{category.id}}">{{category.name}}</a>
+                      {% endfor %}
                   </li>
               </ul>
           </li>
           <li>
-              <a href="#">Your profile</a>
+              <a href="user_page/{{request.session.id}}">Your profile</a>
           </li>
         
           <li>
-              <a href="#">About us</a>
+              <a href="about_us">About us</a>
           </li>
           <li class="active">
             <a href="#contactSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Contact Us</a>
@@ -81,9 +80,11 @@
                 </li>
             </ul>
           </li>
+          {% if 'id' not in request.session %}
           <li>
               <a href="#">Log in/Create an account</a>
           </li>
+          {% endif %}
       </ul>
 
   </nav>
@@ -143,34 +144,12 @@
       <div class="categories_pics">
         <!-- DATA from DB just for testing -->
         <div class="row">
+          {% for category in all_categories %}
           <div class="column">
-            <a href="category"><img class="rounded" src="{% static 'images/Sci-Fi.jpeg' %}" alt="Snow" style="width:100%"></a>
-            <p class='hide'>Science-Fiction</p>
+            <a href="category/{{category.id}}"><img class="rounded" src="{{category.image.url}}" alt="Snow" style="width:100%"></a>
+            <p class='hide'>{{category.name}}</p>
           </div>
-          <div class="column">
-            <a href="category"><img class="rounded" src="{% static 'images/Mystery.jpeg' %}" alt="Forest" style="width:100%"></a>
-            <p class='hide'>Mystery</p>
-          </div>
-          <div class="column">
-            <a href="category"><img class="rounded" src="{% static 'images/Fiction.jpeg' %}" alt="Mountains" style="width:100%"></a>
-            <p class='hide'>Fiction</p>
-          </div>
-          <div class="column">
-            <a href="category"><img class="rounded" src="{% static 'images/bg_1.jpg' %}" alt="Snow" style="width:100%"></a>
-            <p class='hide'>Adventure</p>
-          </div>
-          <div class="column">
-            <a href="category"><img class="rounded" src="{% static 'images/Romance.jpeg' %}" alt="Forest" style="width:100%"></a>
-            <p class='hide'>Romance</p>
-          </div>
-          <div class="column">
-            <a href="category"><img class="rounded" src="{% static 'images/bg_1.jpg' %}" alt="Snow" style="width:100%"></a>
-            <p class='hide'>Adventure</p>
-          </div>
-          <div class="column">
-            <a href="category"><img class="rounded" src="{% static 'images/Romance.jpeg' %}" alt="Forest" style="width:100%"></a>
-            <p class='hide'>Romance</p>
-          </div>
+          {% endfor %}
         </div>
       </div>
 </div>

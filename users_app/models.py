@@ -42,7 +42,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     Birthday = models.DateField(default = date.today())
     email = models.CharField(max_length=255, unique=True)
-    #image field
+    image = models.ImageField(upload_to='images/' , default="default1.jpg")
     Password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
