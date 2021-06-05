@@ -15,9 +15,7 @@ class UserManager(models.Manager):
             errors['email'] = "Invalid email address!"
         if len(postData['password']) < 8:
             errors["password"] = "Password should be at least 8 characters"
-        date_time_obj = datetime. strptime(postData['birthday'], '%Y-%m-%d').date()
-        if date_time_obj >= date.today():
-            errors["date"] = "Date must be in the past" 
+        
         
         return errors
     
@@ -48,8 +46,8 @@ class User(models.Model):
     objects = UserManager()
 
 
-def create_users(first_name, last_name, email, Password,Birthday):
-    user = User.objects.create(first_name=first_name, last_name=last_name, email=email, Password=Password, Birthday = Birthday)
+def create_users(first_name, last_name, email, Password):
+    user = User.objects.create(first_name=first_name, last_name=last_name, email=email, Password=Password)
     return user
 
 

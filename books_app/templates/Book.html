@@ -71,6 +71,14 @@
         border-width: 3px;
         border-color: #d8ae92;
       }
+      .ah4{
+        height: auto;
+        padding: 1rem;
+        background-color: #e5f8f6;
+        border-radius: 10px;
+        border-width: 3px;
+        border-color: #d8ae92;
+      }
       .ah3{
         height: 10rem;
         padding: 1rem;
@@ -153,7 +161,11 @@
       .bookify-color {
         color: #6d7fcc;
       }
-    
+      .ah_table2 p{
+        color: black;
+      }
+
+     
     </style>
 </head>
   
@@ -241,98 +253,128 @@
       <div class="ah-container">
         <div class="ah-flex2">
             <div class="ah-side">
-              <h1>{Book Name}</h1><br></br><br>
-              
+              <h1>{{book.title}}</h1><br></br><br>
+              <!-- later --adel  -->
               <img class=" rounded ah-img" src="https://edit.org/images/cat/book-covers-big-2019101610.jpg" alt="image of book" width="40%" height="40%" class="d-inline-block align-top"><br></br><br>
-      
             </div>
             <div class="ah_div">
-            <form>
-              <div class="form-group">
-                <textarea class=" w-100 ah1"  id="exampleFormControlTextarea1" rows="4"  placeholder="Book description"></textarea>
-            </form>
-
-            
-              <div class="buy_div">      
-                <form class="buy">
-                  <table class="table  ah_table" >
-                    <tbody>
-                      <tr>
-                        <th scope="row" class="ah_table1">Title</th>
-                        <td class="ah_table2"> <input type="text" class="form-control" id="validationTooltip03" required></td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ah_table1">Addition date</th>
-                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ah_table1">Location</th>
-                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ah_table1">Categories</th>
-                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ah_table1">Added by</th>
-                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ah_table1">To be exchanged with</th>
-                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ah_table1">Price</th>
-                        <td class="ah_table2"><input type="text" class=" form-control" id="validationTooltip03" required></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </form>
-              </div> 
-              
-            
+           
             <div class="exc_div">         
-              <form class="exc">
-                <table class="table  ah_table" >
+              <form class="exc" action="/books/update_book/{{book.id}}" method="POST">
+                {% csrf_token %}
+                <div class="ah4">
+                  {% if book.uploaded_by.id == request.session.id %} 
+                      <textarea class=" w-100 ah1" name="description"   rows="4"  placeholder="Book description">{{book.description}}</textarea>
+                  {% else %}
+                      <p>{{book.description}}</p>
+                  {% endif %}
+                  </div><br>
+                <table class="table ah_table" >
                   <tbody>
                     <tr>
                       <th scope="row" class="ah_table1">Title</th>
-                      <td class="ah_table2"> <input type="text" class="form-control" id="validationTooltip03" required></td>
+                      {% if book.uploaded_by.id == request.session.id %}
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" value="{{book.title}}" name="title" required></td>
+                      {% else %}
+                      <td class="ah_table2"><p>{{book.title}}</p></td>
+                      {% endif %}
                     </tr>
                     <tr>
                       <th scope="row" class="ah_table1">Addition date</th>
-                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      {% if book.uploaded_by.id == request.session.id %}
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" name="addition_date" value="{{book.created_at}}" required></td>
+                      {% else %}
+                      <td class="ah_table2"><p>{{book.created_at}}</p></td>
+                      {% endif %}
                     </tr>
                     <tr>
                       <th scope="row" class="ah_table1">Location</th>
-                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      {% if book.uploaded_by.id == request.session.id %}
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" name="location" value="{{book.location}}" required></td>
+                      {% else %}
+                      <td class="ah_table2"><p>{{book.location}}</p></td>
+                      {% endif %}
                     </tr>
                     <tr>
                       <th scope="row" class="ah_table1">Categories</th>
-                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      {% if book.uploaded_by.id == request.session.id %}
+                      <td class="ah_table2">
+                        <select name="category" class="push-down w-25">
+                          {% for category in all_categories %}
+                          <option value="{{ category.id }}">{{ category.name }}</option>
+                          {% endfor %}
+                          </select><br>
+                      </td>
+                      {% else %}
+                      <td class="ah_table2"><p>{{book.book_category.name}}</p></td>
+                      {% endif %}
                     </tr>
                     <tr>
                       <th scope="row" class="ah_table1">Added by</th>
-                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      {% if book.uploaded_by.id == request.session.id %}
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" value="{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}" required></td>
+                      {% else %}
+                      <td class="ah_table2"><p>{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p></td>
+                      {% endif %}
                     </tr>
                     <tr>
                       <th scope="row" class="ah_table1">To be exchanged with</th>
-                      <td class="ah_table2"> <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                      </select></td>
+                      {% if book.uploaded_by.id == request.session.id %}
+                      <td class="ah_table2">
+                        <select name="bookCategory" class="push-down w-25">
+                          {% for category in all_categories %}
+                          <option value="{{ category.id }}">{{ category.name }}</option>
+                          {% endfor %}
+                          </select><br>
+                      </td>
+                      {% else %}
+                      <td class="ah_table2"><p>{{book.to_exchange_with.name}}</p></td>
+                      {% endif %}
                     </tr>
                     <tr>
                       <th scope="row" class="ah_table1">Price</th>
-                      <td class="ah_table2"><input type="text" class=" form-control" id="validationTooltip03" required></td>
+                      {% if book.uploaded_by.id == request.session.id %}
+                      <td class="ah_table2"><input type="text" class=" form-control" id="validationTooltip03" name="price" value="{{book.price}}" required></td>
+                      {% else %}
+                      <td class="ah_table2"><p>{{book.price}}</p></td>
+                      {% endif %}
                     </tr>
                   </tbody>
                 </table>
+                <input style="display: none;" type="submit" value="Edit" class="btn btn-warning btn-sm ah_btn"id="exc_btn">
+
+                {% if book.uploaded_by.id == request.session.id %}
+                  <input type="submit" value="Edit" class="btn btn-warning btn-sm ah_btn"id="exc_btn">
+
+                {% endif %}
               </form>
             </div>
             <div>
-              <button type="button" class="btn btn-warning btn-sm ah_btn"id="exc_btn">Exchange </button>
-              <button type="button" class="btn btn-warning btn-sm ah_btn" id="buy_btn"> Buy </button>
+              {% if book.uploaded_by.id != request.session.id %}
+              <a class="btn btn-primary button-color w-50" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Exchange
+              </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+              <form action="/books/exchange_book/{{book.id}}" method="POST">
+                {% csrf_token %}
+                  <select name="exchange">
+                    {% for user_book in user.book_user.all %}
+                    {% if user_book.book_category.id ==  book.to_exchange_with.id %}
+                    <option value="{{user_book.id}}">
+                      {{user_book.title}}
+                    </option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                  <input type="submit" value="submit">
+                </form>
+                </div>
+                </div>
+              <a href="/books/buy_book/{{book.id}}" class="btn btn-warning btn-sm ah_btn"> Buy </a>
+              {% endif %}
+              
             </div>
             </div>
           </div>
@@ -365,23 +407,6 @@
   </div>
 </div>
 <script>
-  
-  $('.buy_div').hide();
-  $(function(){
-    $('#buy_btn').on('click',function(e){
-      $('.exc_div').css('display','none');
-      $('.buy_div').css('display','inline');
-      e.preventDefault();
-    });
-  });
-  $(function(){
-    $('#exc_btn').on('click',function(e){
-      $('.buy_div').css('display','none');
-      $('.exc_div').css('display','inline');
-      e.preventDefault();
-    });
-  });
-
 
  
 </script>

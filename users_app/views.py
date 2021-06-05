@@ -27,7 +27,7 @@ def registration(request):
                 pw_hash = bcrypt.hashpw(
                     password.encode(), bcrypt.gensalt()).decode()
                 user = models.create_users(
-                    request.POST['fname'], request.POST['lname'], request.POST['email'], pw_hash, request.POST['birthday'])
+                    request.POST['fname'], request.POST['lname'], request.POST['email'], pw_hash)
             except IntegrityError as uniquefailed:
                 errors["unique"] = "Email already exists, please use another email!"
             if len(errors) > 0:

@@ -55,3 +55,42 @@ def create_book(title,description,location,book_category,price,image,uploaded_by
     new_book = Book.objects.create(title=title,description=description,location=location,book_category=book_category,price=price,image=image,uploaded_by=uploaded_by,to_exchange_with=to_exchange_with)
     return new_book
 
+<<<<<<< HEAD
+def update_book(book_id,title,description,location,book_category,price,to_exchange_with): 
+    this_book = get_book_by_id(book_id)
+    this_book.title=title 
+    this_book.description=description
+    this_book.location=location
+    this_book.book_category=book_category
+    this_book.price=price
+    this_book.to_exchange_with=to_exchange_with
+    this_book.save()
+    return this_book
+
+def update_owner(book_id,user_id):
+    this_book = get_book_by_id(book_id)
+    this_book.uploaded_by = User.objects.get(id=user_id)
+    this_book.save()
+    return this_book
+
+
+=======
+
+def get_by_location(location):
+    return Book.objects.filter(location = location)
+
+
+def sort_a_z(category_id):
+    test= Category.objects.get(id=category_id)
+    return test.book_cat.all().order_by('title')
+
+def sort_z_a(category_id):
+    test= Category.objects.get(id=category_id)
+    return test.book_cat.all().order_by('-title')
+
+def sort_price(category_id):
+    test= Category.objects.get(id=category_id)
+    return test.book_cat.all().order_by('price')
+>>>>>>> eff554dd2bd4c1e1cf914508beae63883ddf3ed0
+
+
