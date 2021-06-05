@@ -55,3 +55,18 @@ def create_book(title,description,location,book_category,price,image,uploaded_by
     new_book = Book.objects.create(title=title,description=description,location=location,book_category=book_category,price=price,image=image,uploaded_by=uploaded_by,to_exchange_with=to_exchange_with)
     return new_book
 
+
+def get_by_location(location):
+    return Book.objects.filter(location = location)
+
+
+def sort_a_z():
+    return Book.objects.order_by('title')
+
+def sort_z_a():
+    return Book.objects.order_by('-title')
+
+
+def sort_price():
+    return Book.objects.order_by('price')
+

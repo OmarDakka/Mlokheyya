@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import redirect, render
 from . import models
 from users_app.models import User, get_user_by_id
@@ -9,11 +10,24 @@ def index(request):
     }
     return render (request,'home.html',context)
 
-def category(request,category_id):
+def category(request, category_id):
     context = {
-        "category":models.get_category_by_id(id=category_id)
+        'categories' : models.get_all_categories(),
+        'books' : models.get_books(),
+        'current_category' : models.get_category_by_id(category_id  ),
     }
-    return render (request,'Category.html',context)
+    if request.method == 'POST':
+        location = request.post['location']
+        context['books'] = models.get_by_location(location)
+        if request.POST['button'] == "a-z":
+            context['books'] =  models.sort_a_z()
+        if request.POST['button'] == "z-a":
+            context['books'] =  models.sort_z_a()
+        if request.POST['button'] == "price":
+            context['books'] =  models.sort_a_z()
+
+    return render (request,'Category.html', context)
+
 
 
 def book(request,book_id):
@@ -44,4 +58,23 @@ def add_book(request):
 
 def about_us(request):
     return render (request,'About_us.html')
+
+def sort(request,category_id):
+    context = {
+    'categories' : models.get_all_categories(),
+    'books' : models.get_books(),
+    'current_category' : models.get_category_by_id(category_id),
+}
+
+    if request.method == 'POST':
+        location = request.POST['location']
+        context['books'] = models.get_by_location(location)
+        if request.POST['button'] == "a-z":
+            context['books'] =  models.sort_a_z()
+        if request.POST['button'] == "z-a":
+            context['books'] =  models.sort_z_a()
+        if request.POST['button'] == "price":
+            context['books'] =  models.sort_a_z()
+        
+    return render(request,'Category.html', context)
 
