@@ -28,6 +28,19 @@
       p { 
         color: black;
       }
+
+      .bookify-color {
+        color: #6d7fcc;
+      }
+      
+      .button-color {
+       background-color: #6d7fcc;
+       border-color: #6d7fcc;
+      }
+
+      .search-width{
+        width: 150px;
+      }
     </style>
 </head>
   
@@ -81,8 +94,8 @@
   <!-- Page Content  -->
   <div id="content">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+          <!-- <div class="d-flex justify-content-between"> -->
 
               <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
                 <i class="gg-menu"></i>
@@ -90,22 +103,20 @@
               <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="gg-menu"></i>
               </button>
-
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="nav navbar-nav ml-auto">
-                      <li>
-                       <input type="search" class="">
-                       <button type="submit" class="btn btn-sm btn-primary ">Search</button> 
-                      </li>
-                  </ul>
-              </div>
-          </div>
+              <h2 class="bookify-color">Bookify</h2>
+               <div>
+                       <input type="search" class="search-width">
+                       <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
+               </div>
+              
+             
+          <!-- </div> -->
       </nav>
       <div id="content" class="p-4 p-md-5 pt-5">
         <h2 class="mb-4">USERNAME</h2>
       <center>
       <p>
-        <a class="btn btn-primary w-50" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <a class="btn btn-primary button-color w-50" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
           Add a New Book
         </a>
       </p>
@@ -138,7 +149,7 @@
           <label for="bookDescription" class="w-25">Add a Description for your book</label>
           <input type="text " name="bookDescription" class="push-down w-25">
           <br><br>
-          <button type="submit" class="btn btn-lg btn-primary w-50">Submit Book</button>
+          <button type="submit" class="btn btn-lg btn-primary button-color w-50">Submit Book</button>
           </center>
         </div>
       </div>
@@ -160,7 +171,7 @@
               <p>Description</p>
               <p>More Description</p>
               <p>Even More Description</p>
-              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
             </div>
           </div>
       
@@ -174,7 +185,7 @@
               <p>Description</p>
               <p>More Description</p>
               <p>Even More Description</p>
-              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
             </div>
           </div>
       
@@ -188,7 +199,7 @@
               <p>Description</p>
               <p>Even More Description</p>
               <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
             </div>
           </div>
           <div class="col-md-4 push-down">
@@ -201,7 +212,7 @@
               <p>Description</p>
               <p>Even More Description</p>
               <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
             </div>
           </div>
           <div class="col-md-4 push-down">
@@ -214,7 +225,7 @@
               <p>Description</p>
               <p>Even More Description</p>
               <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
             </div>
           </div>
           <div class="col-md-4 push-down">
@@ -227,7 +238,7 @@
               <p>Description</p>
               <p>Even More Description</p>
               <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
             </div>
           </div>
       
