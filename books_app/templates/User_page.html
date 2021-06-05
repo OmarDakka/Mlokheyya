@@ -12,6 +12,7 @@
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <style>
       .push-down {
         margin-bottom: 10px;
@@ -48,57 +49,58 @@
 <div class="wrapper">
   <!-- Sidebar  -->
   <nav id="sidebar">
-      <div class="sidebar-header">
-          <h3>Bookify</h3>
-      </div>
-
-      <ul class="list-unstyled components">
+    <div class="sidebar-header">
+        <h3>Bookify</h3>
+    </div>
+    <ul class="list-unstyled components">
+        {% if 'id' in request.session %}
         <div class="user-logo">
           <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
-          <h4>User Name</h4>
+          <!-- we will change it to user image -->
+          <h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
         </div>
-          <li class="active">
-              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                  <li>
-                      <a href="#">Category 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 2</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 3</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 4</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 5</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <a href="#">Your profile</a>
-          </li>
-        
-          <li>
-              <a href="#">About us</a>
-          </li>
-          <li class="active">
-            <a href="#contactSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Contact Us</a>
-            <ul class="collapse list-unstyled" id="contactSubmenu">
+        {% else %}
+        <div class="user-logo">
+          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <!-- we will change it to user image -->
+          <h4>User Name (log in)</h4>
+        </div>
+        {% endif %}
+        <!-- DATA from DB just for testing -->
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    <p>Bookie@info.co</p>
-                    <p>+970599123123</p>
+                  {% for category in all_categories %}
+                    <a href="/books/category/{{category.id}}">{{category.name}}</a>
+                    {% endfor %}
                 </li>
             </ul>
-          </li>
-          <li>
-              <a href="#">Log in/Create an account</a>
-          </li>
-      </ul>
+        </li>
+        <li>
+            <a href="user_page/{{request.session.id}}">Your profile</a>
+        </li>
+      
+        <li>
+            <a href="about_us">About us</a>
+        </li>
+        <li class="active">
+          <a href="#contactSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Contact Us</a>
+          <ul class="collapse list-unstyled" id="contactSubmenu">
+              <li>
+                  <p>Bookie@info.co</p>
+                  <p>+970599123123</p>
+              </li>
+          </ul>
+        </li>
+        {% if 'id' not in request.session %}
+        <li>
+            <a href="#">Log in/Create an account</a>
+        </li>
+        {% endif %}
+    </ul>
 
-  </nav>
+</nav>
 
   <!-- Page Content  -->
   <div id="content">
@@ -122,7 +124,7 @@
           <!-- </div> -->
       </nav>
       <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">USERNAME</h2>
+        <h2 class="mb-4">{{request.session.first_name}} {{request.session.last_name}}</h2>
       <center>
       <p>
         <a class="btn btn-primary button-color w-50" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -132,10 +134,18 @@
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
           <center>
+        <form action="/books/add_book" method="POST">
+          {% csrf_token %}
           <label for="addPicture" class="w-25">Add Picture</label>
           <input type="file" name="addPicture" class="w-25"><br>
           <label for="bookTitle" class="w-25">Book Title</label>
           <input type="text" name="bookTitle" class="w-25 up"><br>
+          <label for="category" class="w-25">Select a Category</label>
+          <select name="category" class="push-down w-25">
+          {% for category in all_categories %}
+          <option value="{{ category.id }}">{{ category.name }}</option>
+          {% endfor %}
+          </select><br>
           <label for="location" class="w-25">Location</label>
           <select name="location" class="push-down w-25">
             <option value="Ramallah">Ramallah</option>
@@ -146,21 +156,31 @@
             <option value="Jericho">Jericho</option>
             <option value="Jenin">Jenin</option>
           </select>
-          <form class="w-25">
+          <div class="w-25" id="selling-method">
           <p>Select your selling method: </p>
-          <input type="radio" id="sell" name="method" value="sell">
-          <label for="sell">Sell it</label>
-          <input type="radio" id="exchange" name="method" value="exchange">
-          <label for="exchange">Exchange it</label>
-          <input type="radio" id="both" name="method" value="both">
-          <label for="both">Both</label>
-          </form>
+          <button type="button" class="selling btn btn-sm btn-primary button-color" id="sell" name="method" value="sell">Sell it</button>
+          <button type="button" class="exchanged btn btn-sm btn-primary button-color" id="exchange" name="method" value="exchange"> Exchange it </button>
+          <button type="button" class="bothing btn btn-sm btn-primary button-color" id="both" name="method" value="both">Both</button>
+          </div><br>
+          <div>
+            <label for="price" class="pricing">Price</label>
+            <input type="number" name="price" class="w-25 pricing">
+          </div><br>
+          <div>
+            <label for="to_exchange" class="to_exchange">Category to exchange with</label>
+            <select name="to_exchange"  class="push-down w-25 to_exchange">
+              {% for category in all_categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+              {% endfor %}
+              </select><br>
+            </div>
           <label for="bookDescription" class="w-25">Add a Description for your book</label>
           <input type="text " name="bookDescription" class="push-down w-25">
           <br><br>
           <button type="submit" class="btn btn-lg btn-primary button-color w-50">Submit Book</button>
-          </center>
-        </div>
+        </form>
+        </center>
+      </div>
       </div>
     
       <div class="container text-center">
@@ -169,88 +189,19 @@
         <br>
       
         <div class="row">
-      
+          {% for book in user.book_user.all %}
           <div class="col-md-4 push-down">
-            <h3><strong>The Witcher</strong></h3>
+            <h3><strong>{{book.name}}</strong></h3>
             <br>
-            <a href="#demo1" data-toggle="collapse">
-              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+            <a href="#{{book.id}}" data-toggle="collapse">
+              <img src="/media/images/{{book.image}}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
             </a>
-            <div id="demo1" class="collapse">
-              <p>Description</p>
-              <p>More Description</p>
-              <p>Even More Description</p>
-              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
+            <div id="{{book.id}}" class="collapse">
+              <p>{{book.description}}</p>
+              <a href="/books/book/{{book.id}}" class="btn btn-md btn-primary button-color">EDIT</a>
             </div>
           </div>
-      
-          <div class="col-md-4 push-down">
-            <h3><strong>The Hunger Games</strong></h3>
-            <br>
-            <a href="#demo2" data-toggle="collapse">
-              <img src="{% static 'images/The hunger games.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
-            </a>
-            <div id="demo2" class="collapse">
-              <p>Description</p>
-              <p>More Description</p>
-              <p>Even More Description</p>
-              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
-            </div>
-          </div>
-      
-          <div class="col-md-4 push-down">
-            <h3><strong>The Witcher</strong></h3>
-            <br>
-            <a href="#demo3" data-toggle="collapse">
-              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
-            </a>
-            <div id="demo3" class="collapse">
-              <p>Description</p>
-              <p>Even More Description</p>
-              <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
-            </div>
-          </div>
-          <div class="col-md-4 push-down">
-            <h3><strong>The Witcher</strong></h3>
-            <br>
-            <a href="#demo4" data-toggle="collapse">
-              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
-            </a>
-            <div id="demo4" class="collapse">
-              <p>Description</p>
-              <p>Even More Description</p>
-              <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
-            </div>
-          </div>
-          <div class="col-md-4 push-down">
-            <h3><strong>The Witcher</strong></h3>
-            <br>
-            <a href="#demo5" data-toggle="collapse">
-              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
-            </a>
-            <div id="demo5" class="collapse">
-              <p>Description</p>
-              <p>Even More Description</p>
-              <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
-            </div>
-          </div>
-          <div class="col-md-4 push-down">
-            <h3><strong>The Witcher</strong></h3>
-            <br>
-            <a href="#demo6" data-toggle="collapse">
-              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
-            </a>
-            <div id="demo6" class="collapse">
-              <p>Description</p>
-              <p>Even More Description</p>
-              <p>More and More Description</p>
-              <button type="submit" class="btn btn-md btn-primary button-color">EDIT</button>
-            </div>
-          </div>
-      
+          {% endfor %}
         </div>
       </div>
    
@@ -259,6 +210,34 @@
 
   </div>
 </div>
+<script>
+  
+
+  $(function(){
+    $('.selling').on('click',function(e){
+      $('.to_exchange').css('display','none');
+      $('.pricing').css('display','inline');
+      e.preventDefault();
+    });
+  });
+  $(function(){
+    $('.exchanged').on('click',function(e){
+      $('.pricing').css('display','none');
+      $('.to_exchange').css('display','inline');
+      e.preventDefault();
+    });
+  });
+  $(function(){
+    $('.bothing').on('click',function(e){
+      $('.pricing').css('display','inline');
+      $('.to_exchange').css('display','inline');
+      e.preventDefault();
+    });
+  });
+
+
+ 
+</script>
 </body>
 
 </html>

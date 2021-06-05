@@ -16,11 +16,11 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     location = models.CharField(max_length=255)
-    book_category = models.ManyToManyField(Category,related_name="category_books")
-    price = models.IntegerField()
+    book_category = models.ForeignKey(Category,related_name="book_cat", default=None ,on_delete=CASCADE)
+    price = models.IntegerField(default=None)
     image = models.ImageField(upload_to='images/' , default="default.jpg")
     uploaded_by = models.ForeignKey(User,related_name="book_user",on_delete=CASCADE)
-    to_exchange_with = models.ManyToManyField(Category,related_name="exchange_category")
+    to_exchange_with = models.ForeignKey(Category,related_name="exchange_category", default=None ,on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -34,7 +34,7 @@ class Comment(models.Model):
 
 class Selling_method(models.Model):
     method = models.CharField(max_length = 255)
-    book = models.ForeignKey(Book, related_name="method", on_delete=CASCADE)
+    book = models.ManyToManyField(Book, related_name="method")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -51,4 +51,7 @@ def get_all_categories():
 def get_category_by_id(id):
     return Category.objects.get(id=id)
 
+def create_book(title,description,location,book_category,price,image,uploaded_by,to_exchange_with):
+    new_book = Book.objects.create(title=title,description=description,location=location,book_category=book_category,price=price,image=image,uploaded_by=uploaded_by,to_exchange_with=to_exchange_with)
+    return new_book
 

@@ -40,7 +40,6 @@ class UserManager(models.Manager):
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    Birthday = models.DateField(default = date.today())
     email = models.CharField(max_length=255, unique=True)
     image = models.ImageField(upload_to='images/' , default="default1.jpg")
     Password = models.CharField(max_length=255)
