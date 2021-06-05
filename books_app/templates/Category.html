@@ -195,7 +195,7 @@
           <button name="button" value="z-a" type="submit" class=" label btn btn-secondary"> Z - A </button>
       </form>
       <div class="d-flex flex-wrap books_main">
-        {% for book in current_category.book_cat.all %}
+        {% for book in books %}
         <div class="d-flex book_div" >
           <a href="#"> <img class="bookimg" src="{% static 'images/bg_1.jpg' %}" /> </a>
           <!-- <div class="height_dev">

@@ -60,13 +60,16 @@ def get_by_location(location):
     return Book.objects.filter(location = location)
 
 
-def sort_a_z():
-    return Book.objects.order_by('title')
+def sort_a_z(category_id):
+    test= Category.objects.get(id=category_id)
+    return test.book_cat.all().order_by('title')
 
-def sort_z_a():
-    return Book.objects.order_by('-title')
+def sort_z_a(category_id):
+    test= Category.objects.get(id=category_id)
+    return test.book_cat.all().order_by('-title')
 
+def sort_price(category_id):
+    test= Category.objects.get(id=category_id)
+    return test.book_cat.all().order_by('price')
 
-def sort_price():
-    return Book.objects.order_by('price')
 

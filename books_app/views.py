@@ -16,6 +16,7 @@ def category(request, category_id):
         'books' : models.get_books(),
         'current_category' : models.get_category_by_id(category_id  ),
     }
+    context['books'] = models.Book.objects.filter(book_category = context['current_category'])
     if request.method == 'POST':
         location = request.post['location']
         context['books'] = models.get_by_location(location)
@@ -61,20 +62,20 @@ def about_us(request):
 
 def sort(request,category_id):
     context = {
-    'categories' : models.get_all_categories(),
-    'books' : models.get_books(),
-    'current_category' : models.get_category_by_id(category_id),
-}
-
+        'categories' : models.get_all_categories(),
+        'books' : models.get_books(),
+        'current_category' : models.get_category_by_id(category_id),
+    }
+    context['books'] = models.Book.objects.filter(book_category = models.get_category_by_id(category_id))
     if request.method == 'POST':
         location = request.POST['location']
         context['books'] = models.get_by_location(location)
         if request.POST['button'] == "a-z":
-            context['books'] =  models.sort_a_z()
+            context['books'] =  models.sort_a_z(category_id)
         if request.POST['button'] == "z-a":
-            context['books'] =  models.sort_z_a()
+            context['books'] =  models.sort_z_a(category_id)
         if request.POST['button'] == "price":
-            context['books'] =  models.sort_a_z()
+            context['books'] =  models.sort_a_z(category_id)
         
     return render(request,'Category.html', context)
 
