@@ -12,8 +12,10 @@
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <style>
-      .push-down {
+       .push-down {
         margin-bottom: 10px;
       }
   
@@ -24,6 +26,130 @@
       .buttonStretch {
         height: 33px;
       }
+       
+      .area{
+        height: 30px;
+      }
+      .ah_table1{
+        width: 30%;
+        background-image: linear-gradient(to right,#c38d9d,#c38d9d9f);
+        text-align: center;
+        font-size: medium;
+        border-radius: 10px
+      }
+      .ah_table2{
+        width: 80%;
+        background-image: linear-gradient(to right,#c38d9d9f,#779889);
+        border-radius: 10px;
+      }
+      .ah_table{
+        width: 100%;
+        border-radius: 10px
+        
+      }
+      .ah_div{
+        width: 60%;
+      }
+      .ah_box{
+        border: solid;
+        width: 50%;
+      }
+      .ah1{
+        height: 5rem;
+        padding: 1rem;
+        background-color: #c38d9d2a;
+        border-radius: 10px;
+        border-width: 3px;
+        border-color: #e8a87c;
+     
+      } 
+      .ah2{
+        height: auto;
+        padding: 1rem;
+        background-color: #e5f8f6;
+        border-radius: 10px;
+        border-width: 3px;
+        border-color: #e8a87c;
+      }
+      .ah3{
+        height: 10rem;
+        padding: 1rem;
+        width: auto;
+        background-color: #e5f8f6;
+        border-radius: 10px;
+        border-width: 3px;
+        border-color: #e8a87c;
+      }
+
+      .ah_in{
+         background-color: #5e1d0b;
+         width:autoS
+      }
+
+      .ah_left{
+        float: left;
+      }
+     
+
+      .ah-flex{
+        
+        height: 10rem;
+      }
+      .ah-flex2{
+        display: flex;
+        justify-content: space-around;
+      
+        
+        
+      }
+      .ah-com{
+        padding: 1rem;
+      }
+      .ah-side{
+        height: auto;
+
+      }
+      .ah_comment{
+      width: 100%;
+      display: block;
+      }
+    
+      .ah-img{
+      border: 5px solid #e8a87c
+    
+      }
+
+      .ah_btn{
+        width: 30%;
+        height: 3rem;
+        border: none;
+        background-color: #77988970
+      }
+
+      .ah_btn:hover {background-color: #779889}
+
+      .ah_btn:active {
+        background-color: #1d9ea0;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+
+      .ah_button{
+        width: 30%;
+        height: 3rem;
+        border: none;
+        background-color: #77988970 ;
+        float: right;
+        
+      }
+      .ah_button:hover {background-color: #779889}
+
+      .ah_button:active {
+        background-color: #1d9ea0;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+    
     </style>
 </head>
   
@@ -99,10 +225,155 @@
         </div>
     </nav>
     
-    CONTENEETNTTNNTNTNT HEEEERREEEEEEEE
+   
+    <center>
+      <div class="ah-container">
+        <div class="ah-flex2">
+            <div class="ah-side">
+              <h1>{Book Name}</h1><br></br><br>
+              
+              <img class=" rounded ah-img" src="https://edit.org/images/cat/book-covers-big-2019101610.jpg" alt="image of book" width="40%" height="40%" class="d-inline-block align-top"><br></br><br>
+      
+            </div>
+            <div class="ah_div">
+            <form>
+              <div class="form-group">
+                <textarea class=" w-100 ah1"  id="exampleFormControlTextarea1" rows="4"  placeholder="Book description"></textarea>
+            </form>
+
+            
+              <div class="buy_div">      
+                <form class="buy">
+                  <table class="table  ah_table" >
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="ah_table1">Title</th>
+                        <td class="ah_table2"> <input type="text" class="form-control" id="validationTooltip03" required></td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="ah_table1">Addition date</th>
+                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="ah_table1">Location</th>
+                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="ah_table1">Categories</th>
+                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="ah_table1">Added by</th>
+                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="ah_table1">To be exchanged with</th>
+                        <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="ah_table1">Price</th>
+                        <td class="ah_table2"><input type="text" class=" form-control" id="validationTooltip03" required></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div> 
+              
+            
+            <div class="exc_div">         
+              <form class="exc">
+                <table class="table  ah_table" >
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="ah_table1">Title</th>
+                      <td class="ah_table2"> <input type="text" class="form-control" id="validationTooltip03" required></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="ah_table1">Addition date</th>
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="ah_table1">Location</th>
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="ah_table1">Categories</th>
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="ah_table1">Added by</th>
+                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" required></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="ah_table1">To be exchanged with</th>
+                      <td class="ah_table2"> <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="ah_table1">Price</th>
+                      <td class="ah_table2"><input type="text" class=" form-control" id="validationTooltip03" required></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+            <div>
+              <button type="button" class="btn btn-warning btn-sm ah_btn"id="exc_btn">Exchange </button>
+              <button type="button" class="btn btn-warning btn-sm ah_btn" id="buy_btn"> Buy </button>
+            </div>
+            </div>
+          </div>
+         
+      </div>
+      <div class="ah_comment">
+               
+        <select multiple class=" w-100 ah3 " id="comments">
+          <option class="ah-com">comment by {name1}</option>
+          <option class="ah-com">comment by {name2} </option>
+          <option class="ah-com">comment by {name3} </option>
+          <option class="ah-com">comment by {name4} </option>
+          <option class="ah-com">comment by {name5} </option>
+          <option class="ah-com">comment by {name6} </option>
+          <option class="ah-com">comment by {name7} </option>
+          <option class="ah-com">comment by {name8} </option>
+        </select>
+        <form><br></br>
+          <div class="ah-flex" >
+            <input type="text" class="w-100 ah2" id="formGroupExampleInput"   placeholder="Write a comment"><br></br>
+            <button type="button" id="sidebarCollapse" class="btn btn-primary ah_button ">Post!</button>
+          </div>
+        </form>
+    </div>
+      </div>
+      
+    </center>
+
 
   </div>
 </div>
+<script>
+  
+  $('.buy_div').hide();
+  $(function(){
+    $('#buy_btn').on('click',function(e){
+      $('.exc_div').css('display','none');
+      $('.buy_div').css('display','inline');
+      e.preventDefault();
+    });
+  });
+  $(function(){
+    $('#exc_btn').on('click',function(e){
+      $('.buy_div').css('display','none');
+      $('.exc_div').css('display','inline');
+      e.preventDefault();
+    });
+  });
+
+
+ 
+</script>
 </body>
 
 </html>
