@@ -10,13 +10,10 @@ urlpatterns = [
     path('book/<int:book_id>', views.book),
     path('category/<int:category_id>',views.category),
     path('about_us',views.about_us),
-<<<<<<< HEAD
     path('update_book/<int:book_id>',views.update_book_data),
     path('buy_book/<int:book_id>',views.buy_book),
     path('/books/exchange_book/<int:book_id>',views.exchange_book),
-=======
     path('category/sort/<int:category_id>', views.sort),
->>>>>>> eff554dd2bd4c1e1cf914508beae63883ddf3ed0
 
 ]
 

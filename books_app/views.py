@@ -64,7 +64,6 @@ def add_book(request):
 def about_us(request):
     return render (request,'About_us.html')
 
-<<<<<<< HEAD
 def update_book_data(request,book_id):
     title=request.POST['title']
     description=request.POST['description']
@@ -81,7 +80,6 @@ def buy_book(request,book_id):
 
 def exchange_book(request,book_id):
     pass
-=======
 def sort(request,category_id):
     context = {
         'categories' : models.get_all_categories(),
@@ -101,4 +99,3 @@ def sort(request,category_id):
         
     return render(request,'Category.html', context)
 
->>>>>>> eff554dd2bd4c1e1cf914508beae63883ddf3ed0
