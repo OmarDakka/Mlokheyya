@@ -20,7 +20,6 @@ class Book(models.Model):
     price = models.IntegerField()
     #image field
     uploaded_by = models.ForeignKey(User,related_name="book_user",on_delete=CASCADE)
-    
     to_exchange_with = models.ManyToManyField(Category,related_name="exchange_category")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
