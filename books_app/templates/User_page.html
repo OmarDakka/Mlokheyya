@@ -24,6 +24,10 @@
       .buttonStretch {
         height: 33px;
       }
+
+      p { 
+        color: black;
+      }
     </style>
 </head>
   
@@ -36,7 +40,10 @@
       </div>
 
       <ul class="list-unstyled components">
-          <p>Welcome User</p>
+        <div class="user-logo">
+          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <h4>User Name</h4>
+        </div>
           <li class="active">
               <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
               <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -65,7 +72,7 @@
               <a href="#">About us</a>
           </li>
           <li>
-              <a href="#">Create an account</a>
+              <a href="#">Log in/Create an account</a>
           </li>
       </ul>
 
@@ -135,32 +142,98 @@
           </center>
         </div>
       </div>
-      <table class="table table-bordered table-danger background w-50">
-        <thead>
-          <tr>              
-            <th scope="col">Book Picture</th>
-            <th scope="col">Book Title</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="width: 150px;"><img src="{% static 'images/The last wish.jpg'%}" style="height: 150px; width: 100px;" alt="book"></td>
-            <td style="width: 150px;">The Witcher</td>
-            <td><input type="submit" value="EDIT" class="btn btn-lg btn-primary"></td>
-          </tr>
-          <tr>
-            <td><img src="{% static 'images/The hunger games.jpg'%}" style="height: 150px; width: 100px;" alt="book"></td>
-            <td>The Hunger Games</td>
-            <td><input type="submit" value="EDIT" class="btn btn-lg btn-primary"></td>
-          </tr>
-          <tr>
-            <td>PICTURE</td>
-            <td>Game of Thrones</td>
-            <td><input type="submit" value="EDIT" class="btn btn-lg btn-primary "></td>
-          </tr>
-        </tbody>
-      </table>
+    
+      <div class="container text-center">
+        <h2>My Library</h2>
+      
+        <br>
+      
+        <div class="row">
+      
+          <div class="col-md-4 push-down">
+            <h3><strong>The Witcher</strong></h3>
+            <br>
+            <a href="#demo1" data-toggle="collapse">
+              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+            </a>
+            <div id="demo1" class="collapse">
+              <p>Description</p>
+              <p>More Description</p>
+              <p>Even More Description</p>
+              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+            </div>
+          </div>
+      
+          <div class="col-md-4 push-down">
+            <h3><strong>The Hunger Games</strong></h3>
+            <br>
+            <a href="#demo2" data-toggle="collapse">
+              <img src="{% static 'images/The hunger games.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+            </a>
+            <div id="demo2" class="collapse">
+              <p>Description</p>
+              <p>More Description</p>
+              <p>Even More Description</p>
+              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+            </div>
+          </div>
+      
+          <div class="col-md-4 push-down">
+            <h3><strong>The Witcher</strong></h3>
+            <br>
+            <a href="#demo3" data-toggle="collapse">
+              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+            </a>
+            <div id="demo3" class="collapse">
+              <p>Description</p>
+              <p>Even More Description</p>
+              <p>More and More Description</p>
+              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+            </div>
+          </div>
+          <div class="col-md-4 push-down">
+            <h3><strong>The Witcher</strong></h3>
+            <br>
+            <a href="#demo4" data-toggle="collapse">
+              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+            </a>
+            <div id="demo4" class="collapse">
+              <p>Description</p>
+              <p>Even More Description</p>
+              <p>More and More Description</p>
+              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+            </div>
+          </div>
+          <div class="col-md-4 push-down">
+            <h3><strong>The Witcher</strong></h3>
+            <br>
+            <a href="#demo5" data-toggle="collapse">
+              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+            </a>
+            <div id="demo5" class="collapse">
+              <p>Description</p>
+              <p>Even More Description</p>
+              <p>More and More Description</p>
+              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+            </div>
+          </div>
+          <div class="col-md-4 push-down">
+            <h3><strong>The Witcher</strong></h3>
+            <br>
+            <a href="#demo6" data-toggle="collapse">
+              <img src="{% static 'images/The last wish.jpg'%}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+            </a>
+            <div id="demo6" class="collapse">
+              <p>Description</p>
+              <p>Even More Description</p>
+              <p>More and More Description</p>
+              <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+   
       </center>
       </div>
 

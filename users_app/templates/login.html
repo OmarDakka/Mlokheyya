@@ -14,10 +14,24 @@
     <style>
             body {
         margin: 0;
-        color: #6a6f8c;
-        background: #c8c8c8;
+        color: white;
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)no-repeat;;
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;  
         font: 600 16px/18px 'Open Sans', sans-serif
         }
+
+        @keyframes gradient {
+             0% {
+                 background-position: 0% 50%;
+            }
+             50% {
+                background-position: 100% 50%;
+             }
+            100% {
+                background-position: 0% 50%;
+            }
+}
 
         .login-box {
             width: 100%;
@@ -25,7 +39,7 @@
             max-width: 525px;
             min-height: 670px;
             position: relative;
-            background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) no-repeat center;
+            background: url(https://www.ghil.ac.uk/fileadmin/_processed_/1/6/csm_German-Historical-Institute-London_HR0024_e6c6419f96.jpg) no-repeat center;
             box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)
         }
 
@@ -34,7 +48,7 @@
             height: 100%;
             position: absolute;
             padding: 90px 70px 50px 70px;
-            background: rgba(0, 77, 77, .9)
+            background: rgba(108, 130, 193, 0.9)
         }
 
         .login-snip .login,
@@ -104,12 +118,12 @@
         }
 
         .login-space .group input[data-type="password"] {
-            text-security: circle;
+            -text-security: circle;
             -webkit-text-security: circle
         }
 
         .login-space .group .label {
-            color: #aaa;
+            color: white;
             font-size: 12px
         }
 
@@ -207,7 +221,9 @@
 
         .card {
             width: 500px;
-            left: 100px
+            left: 100px;
+            border: 1px solid rgba(0, 0, 0, 0.41);
+            margin-top: 25px;
         }
 
         ::placeholder {
