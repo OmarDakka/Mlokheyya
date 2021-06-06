@@ -16,7 +16,6 @@ class UserManager(models.Manager):
         if len(postData['password']) < 8:
             errors["password"] = "Password should be at least 8 characters"
         
-        
         return errors
     
     def login_validator(self,postData):
