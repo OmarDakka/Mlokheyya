@@ -1,3 +1,4 @@
+from books_app.forms import BookForm
 from django.http import request
 from django.shortcuts import redirect, render
 from . import models
@@ -55,6 +56,14 @@ def add_book(request):
     models.create_book(title,description,location,book_category,price,image,uploaded_by,to_exchange_with)
     return redirect(f"/books/user_page/{request.session['id']}")
 
+def add_book_image(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = BookForm()
+    return render(request, 'User_page.html', {'form' : form})
 
 def about_us(request):
     return render (request,'About_us.html')

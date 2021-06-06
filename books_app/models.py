@@ -17,7 +17,7 @@ class Book(models.Model):
     description = models.TextField()
     location = models.CharField(max_length=255)
     book_category = models.ForeignKey(Category,related_name="book_cat", default=None ,on_delete=CASCADE)
-    price = models.IntegerField(default=None)
+    price = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images/' , default="default.jpg")
     uploaded_by = models.ForeignKey(User,related_name="book_user",on_delete=CASCADE)
     to_exchange_with = models.ForeignKey(Category,related_name="exchange_category", default=None ,on_delete=CASCADE)

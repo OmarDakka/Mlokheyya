@@ -136,8 +136,8 @@
           <center>
         <form action="/books/add_book" method="POST">
           {% csrf_token %}
-          <label for="addPicture" class="w-25">Add Picture</label>
-          <input type="file" name="addPicture" class="w-25"><br>
+          <!-- <label for="addPicture" class="w-25">Add Picture</label> -->
+          <input type="hidden" name="addPicture" class="w-25" value="default.jpg">
           <label for="bookTitle" class="w-25">Book Title</label>
           <input type="text" name="bookTitle" class="w-25 up"><br>
           <label for="category" class="w-25">Select a Category</label>
@@ -164,7 +164,7 @@
           </div><br>
           <div>
             <label for="price" class="pricing">Price</label>
-            <input type="number" name="price" class="w-25 pricing">
+            <input type="number" name="price" value=0 class="w-25 pricing">
           </div><br>
           <div>
             <label for="to_exchange" class="to_exchange">Category to exchange with</label>
@@ -184,21 +184,26 @@
       </div>
     
       <div class="container text-center">
-        <h2>My Library</h2>
+        <h2><strong>My Library</strong></h2>
       
         <br>
       
         <div class="row">
           {% for book in user.book_user.all %}
           <div class="col-md-4 push-down">
-            <h3><strong>{{book.name}}</strong></h3>
+            <h3>{{book.title}}</strong></h3>
             <br>
             <a href="#{{book.id}}" data-toggle="collapse">
-              <img src="/media/images/{{book.image}}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+              <img src="/media/images/{{book.image.url}}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
             </a>
             <div id="{{book.id}}" class="collapse">
               <p>{{book.description}}</p>
               <a href="/books/book/{{book.id}}" class="btn btn-md btn-primary button-color">EDIT</a>
+              <form method = "post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Upload Book Picture</button>
+              </form>
             </div>
           </div>
           {% endfor %}
