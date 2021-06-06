@@ -90,4 +90,8 @@ def sort_price(category_id):
     test= Category.objects.get(id=category_id)
     return test.book_cat.all().order_by('price')
 
-
+def exchange_book(seller, buyer, buyer_book, seller_book):
+    buyer_book.uploaded_by=seller
+    seller_book.uploaded_by= buyer
+    buyer_book.save()
+    seller_book.save()

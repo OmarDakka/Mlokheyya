@@ -32,6 +32,7 @@ def category(request, category_id):
 
 
 def book(request,book_id):
+
     context = {
         "book" : models.get_book_by_id(book_id),
         "all_books":models.get_books(),
@@ -82,7 +83,13 @@ def buy_book(request,book_id):
     return redirect(f'/books/book/{book_id}')
 
 def exchange_book(request,book_id):
-    pass
+    buyer = get_user_by_id( request.session['id'])
+    buyer_book = models.get_book_by_id(request.POST['exchange'])
+    seller_book = models.get_book_by_id(book_id)
+    seller = seller_book.uploaded_by
+    models.exchange_book(seller,buyer,buyer_book,seller_book)
+    return redirect(f'/books/user_page/{buyer.id}')
+
 def sort(request,category_id):
     context = {
         'categories' : models.get_all_categories(),
@@ -101,4 +108,7 @@ def sort(request,category_id):
             context['books'] =  models.sort_a_z(category_id)
         
     return render(request,'Category.html', context)
+
+
+
 
