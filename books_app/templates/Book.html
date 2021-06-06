@@ -146,6 +146,8 @@
         width: 30%;
         height: 3rem;
         border: none;
+
+
         background-color: #77988970 ;
         float: right;
         
@@ -319,6 +321,7 @@
                       {% if book.uploaded_by.id == request.session.id %}
                       <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" value="{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}" required></td>
                       {% else %}
+                      <input type="hidden" name="hidden" value="book.uploaded.id">
                       <td class="ah_table2"><p>{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p></td>
                       {% endif %}
                     </tr>
