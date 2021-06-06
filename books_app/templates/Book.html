@@ -32,14 +32,14 @@
       }
       .ah_table1{
         width: 30%;
-        background-image: linear-gradient(to right,#c38d9d,#c38d9d9f);
+        background-image: linear-gradient(to right,#b0b7d3,#d1ade6);
         text-align: center;
         font-size: medium;
         border-radius: 10px
       }
       .ah_table2{
         width: 80%;
-        background-image: linear-gradient(to right,#c38d9d9f,#779889);
+        background-image: linear-gradient(to right,#d1ade6,#e0cdd4);
         border-radius: 10px;
       }
       .ah_table{
@@ -60,7 +60,7 @@
         background-color: #c38d9d2a;
         border-radius: 10px;
         border-width: 3px;
-        border-color: #e8a87c;
+        /* border-color: #e8a87c; */
      
       } 
       .ah2{
@@ -69,15 +69,15 @@
         background-color: #e5f8f6;
         border-radius: 10px;
         border-width: 3px;
-        border-color: #d8ae92;
+        /* border-color: #d8ae92; */
       }
       .ah4{
         height: auto;
         padding: 1rem;
-        background-color: #e5f8f6;
+        /* background-color: #d1ade6; */
         border-radius: 10px;
         border-width: 3px;
-        border-color: #d8ae92;
+        /* border-color: #d8ae92; */
       }
       .ah3{
         height: 10rem;
@@ -86,12 +86,12 @@
         background-color: #e5f8f6;
         border-radius: 10px;
         border-width: 3px;
-        border-color: #f0bc9a;
+        /* border-color: #f0bc9a; */
       }
 
       .ah_in{
          background-color: #5e1d0b;
-         width:autoS
+         width:auto;
       }
 
       .ah_left{
@@ -122,22 +122,18 @@
       display: block;
       }
     
-      .ah-img{
-      border: 5px solid #e8a87c
-    
-      }
 
       .ah_btn{
         width: 30%;
         height: 3rem;
         border: none;
-        background-color: #77988970
+        background-color: #7386D5
       }
 
-      .ah_btn:hover {background-color: #779889}
+      .ah_btn:hover {background-color: #7386D5}
 
       .ah_btn:active {
-        background-color: #1d9ea0;
+        background-color: #7386D5;
         box-shadow: 0 5px #666;
         transform: translateY(4px);
       }
@@ -148,14 +144,14 @@
         border: none;
 
 
-        background-color: #77988970 ;
+        background-color: #7386D5 ;
         float: right;
         
       }
-      .ah_button:hover {background-color: #779889}
+      .ah_button:hover {background-color: #7386D5}
 
       .ah_button:active {
-        background-color: #1d9ea0;
+        background-color: #7386D5;
         box-shadow: 0 5px #666;
         transform: translateY(4px);
       }
@@ -262,7 +258,7 @@
             <div class="ah-side">
               <h1>{{book.title}}</h1><br></br><br>
               <!-- later --adel  -->
-              <img class=" rounded ah-img" src="{% static 'images/' %}{{book.title}}.jpg" alt="image of book" width="40%" height="40%" class="d-inline-block align-top"><br></br><br>
+              <img class=" rounded ah-img" src="{% static 'images/' %}{{book.title}}.jpg" alt="image of book" width="40%" height="60%" class="d-inline-block align-top"><br></br><br>
             </div>
             <div class="ah_div">
            
@@ -270,9 +266,11 @@
               <form class="exc" action="/books/update_book/{{book.id}}" method="POST">
                 {% csrf_token %}
                 <div class="ah4">
-                  {% if book.uploaded_by.id == request.session.id %} 
+                  {% if book.uploaded_by.id == request.session.id %}
+                      <label for="description"><strong>Book Description</strong></label> 
                       <textarea class=" w-100 ah1" name="description"   rows="4"  placeholder="Book description">{{book.description}}</textarea>
                   {% else %}
+                      <h6>Book Description:</h6><br>
                       <p>{{book.description}}</p>
                   {% endif %}
                   </div><br>
@@ -359,7 +357,7 @@
             </div>
             <div>
               {% if book.uploaded_by.id != request.session.id %}
-              <a class="btn btn-primary button-color w-50" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <a class="btn btn-warning btn-sm ah_btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Exchange
               </a>
             </p>
@@ -388,25 +386,6 @@
           </div>
          
       </div>
-      <div class="ah_comment">
-               
-        <select multiple class=" w-100 ah3 " id="comments">
-          <option class="ah-com">comment by {name1}</option>
-          <option class="ah-com">comment by {name2} </option>
-          <option class="ah-com">comment by {name3} </option>
-          <option class="ah-com">comment by {name4} </option>
-          <option class="ah-com">comment by {name5} </option>
-          <option class="ah-com">comment by {name6} </option>
-          <option class="ah-com">comment by {name7} </option>
-          <option class="ah-com">comment by {name8} </option>
-        </select>
-        <form><br></br>
-          <div class="ah-flex" >
-            <input type="text" class="w-100 ah2" id="formGroupExampleInput"   placeholder="Write a comment"><br></br>
-            <button type="button" id="sidebarCollapse" class="btn btn-primary ah_button ">Post!</button>
-          </div>
-        </form>
-    </div>
       </div>
       
     </center>

@@ -125,7 +125,7 @@
             <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
                   {% for category in categories %}
-                    <a href="/books/category/{{category.id}}">{{category.name}}</a>
+                    <a href="/books/category/{{category.id}}">Category: {{category.name}}</a>
                     {% endfor %}
                 </li>
             </ul>
@@ -181,7 +181,7 @@
       <!-- </div> -->
   </nav>
     
-  <h3>{{current_category.name}}</h3>
+  <h3 style="text-align: center;">{{current_category.name}}</h3>
   <img class="catimg" src="{% static 'images/' %}{{current_category.name}}.jpg" />
       <form action="/books/category/sort/{{current_category.id}}" method="POST"  class="btn-group sortingbar" role="group" aria-label="Basic example">
         {% csrf_token %}
