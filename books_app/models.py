@@ -99,3 +99,4 @@ def exchange_book(seller, buyer, buyer_book, seller_book):
 def delete_this_book(book_id):
     this_book = get_book_by_id(book_id)
     this_book.delete()
+

@@ -116,7 +116,7 @@
         <div class="user-logo">
           <img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
-          <h4>User Name (log in)</h4>
+          <h4>Guest</h4>
         </div>
         {% endif %}
         <!-- DATA from DB just for testing -->
@@ -131,7 +131,7 @@
             </ul>
         </li>
         <li>
-            <a href="/books/user_page/{{request.session.id}}">Your profile</a>
+            <a href="/books/user_page/{{request.session.id}}">My profile</a>
         </li>
       
         <li>

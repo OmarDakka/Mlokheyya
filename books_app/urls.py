@@ -13,5 +13,4 @@ urlpatterns = [
     path('exchange_book/<int:book_id>',views.exchange_book),
     path('category/sort/<int:category_id>', views.sort),
     path('delete_book/<int:book_id>',views.delete_book),
-
 ]
