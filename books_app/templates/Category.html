@@ -11,7 +11,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#book").autocomplete({
+            source: '{% url "home" %}'
+        })
+        });
+        
+    </script>
     <style>
       .catimg{
         width: 20rem;
@@ -116,7 +127,7 @@
         <div class="user-logo">
           <img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
-          <h4>Guest</h4>
+          <h4>GUEST</h4>
         </div>
         {% endif %}
         <!-- DATA from DB just for testing -->
@@ -168,14 +179,12 @@
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
           </button>
-          <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="gg-menu"></i>
-          </button>
           <h2 class="bookify-color">Bookify</h2>
-           <div>
-                   <input type="search" class="search-width">
-                   <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
-           </div>
+          <form action="/books/search" method="POST">
+            {% csrf_token %}
+                   <input type="text" class="search-width" name="book" id="book" >
+                   <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
+           </form>
           
          
       <!-- </div> -->
@@ -185,7 +194,7 @@
   <img class="catimg" src="{% static 'images/' %}{{current_category.name}}.jpg" />
       <form action="/books/category/sort/{{current_category.id}}" method="POST"  class="btn-group sortingbar" role="group" aria-label="Basic example">
         {% csrf_token %}
-          <label for="" class="label btn btn-secondary "> Sort by </label>
+          <label for="" class="label btn btn-secondary " > Sort by </label>
           <select name="location" class="label btn btn-secondary  " id="inlineFormCustomSelect">
             <option selected>Location</option>
             <option value="Ramallah">Ramallah</option>
@@ -196,15 +205,19 @@
             <option value="Jericho">Jericho</option>
             <option value="Jenin">Jenin</option>
         </select>
+          <button name="button" value="location" type="submit" class="label btn btn-secondary ">Select City </button>
           <button name="button" value="price" type="submit" class="label btn btn-secondary ">Price</button>
-
           <button name="button" value="a-z" type="submit" class="label btn btn-secondary"> A - Z </button>
           <button name="button" value="z-a" type="submit" class=" label btn btn-secondary"> Z - A </button>
       </form>
       <div class="d-flex flex-wrap books_main">
         {% for book in books %}
         <div class="d-flex book_div" >
+<<<<<<< HEAD
+          <a href="/books/book/{{book.id}}"> <img class="bookimg" src="{% static 'images/bg_1.jpg' %}" /> </a>
+=======
           <a href="#"> <img class="bookimg" src="{% static 'images/' %}{{book.title}}.jpg" /> </a>
+>>>>>>> 7cdf9e105858f60bd8710ba8bc3bb94e184e4333
           <!-- <div class="height_dev">
 
         </div> -->
@@ -212,7 +225,10 @@
                 <p class="p-2 info_p"><span class="info_label">Title:</span> {{book.title}}</p>
                 <p class="p-2 info_p" ><span class="info_label">Location:</span> {{book.location}} </p>
                 <p class="p-2 info_p" ><span class="info_label">Categories:</span> {{book.book_category.name}}</p>
+                <p class="p-2 info_p"><span class="info_label">Price:</span> {{book.price}} (ILS)</p>
                 <p class="p-2 last_p" ><span class="info_label">Description:</span><br> {{book.description}}</p>
+                <p class="p-2 last_p" ><span class="info_label">ID:</span><br> {{book.id}}</p>
+
             </div>
         </div>
         {% endfor%}

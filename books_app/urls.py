@@ -1,8 +1,10 @@
+from re import search
 from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.home,name='home'),
+    path('search',views.search),
     path('user_page/<int:user_id>',views.user_page),
     path('add_book',views.add_book),
     path('book/<int:book_id>', views.book),
