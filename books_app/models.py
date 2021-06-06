@@ -12,6 +12,8 @@ class Category(models.Model):
     # image = models.TextField(default="default.jpg")
 
 
+
+
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -74,8 +76,9 @@ def update_owner(book_id,user_id):
 
 
 
-def get_by_location(location):
-    return Book.objects.filter(location = location)
+def get_by_location(location,category_id):
+    test= Category.objects.get(id=category_id)
+    return Book.objects.filter(location = location, book_category = test)
 
 
 def sort_a_z(category_id):
@@ -94,8 +97,16 @@ def exchange_book(seller, buyer, buyer_book, seller_book):
     buyer_book.uploaded_by=seller
     seller_book.uploaded_by= buyer
     buyer_book.save()
+<<<<<<< HEAD
+    seller_book.save()
+=======
     seller_book.save()
 
 def delete_this_book(book_id):
     this_book = get_book_by_id(book_id)
     this_book.delete()
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7cdf9e105858f60bd8710ba8bc3bb94e184e4333
+>>>>>>> acbab680cd552509311338a994142aaa409c52ee

@@ -9,4 +9,5 @@ $(document).ready(function () {
 		function(){
 		$(this).children('p').addClass('hide');
 		$(this).children('img').removeClass('hide');});
+	
 });

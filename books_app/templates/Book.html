@@ -12,8 +12,19 @@
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#book").autocomplete({
+            source: '{% url "home" %}'
+        })
+        });
+        
+    </script>
     <style>
        .push-down {
         margin-bottom: 10px;
@@ -57,7 +68,7 @@
       .ah1{
         height: 5rem;
         padding: 1rem;
-        background-color: #c38d9d2a;
+        background-color: #5d5fd869;
         border-radius: 10px;
         border-width: 3px;
         /* border-color: #e8a87c; */
@@ -162,7 +173,7 @@
       .ah_table2 p{
         color: black;
       }
-
+      
      
     </style>
 </head>
@@ -185,7 +196,7 @@
         <div class="user-logo">
           <img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
-          <h4>User Name (log in)</h4>
+          <h4>GUEST</h4>
         </div>
         {% endif %}
         <!-- DATA from DB just for testing -->
@@ -200,7 +211,7 @@
             </ul>
         </li>
         <li>
-            <a href="/books/user_page/{{request.session.id}}">Your profile</a>
+            <a href="/books/user_page/{{request.session.id}}">My profile</a>
         </li>
       
         <li>
@@ -238,14 +249,12 @@
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
           </button>
-          <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="gg-menu"></i>
-          </button>
           <h2 class="bookify-color">Bookify</h2>
-           <div>
-                   <input type="search" class="search-width">
-                   <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
-           </div>
+          <form action="/books/search" method="POST">
+            {% csrf_token %}
+                   <input type="text" class="search-width" name="book" id="book" >
+                   <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
+           </form>
           
          
       <!-- </div> -->
@@ -285,17 +294,20 @@
                       {% endif %}
                     </tr>
                     <tr>
-                      <th scope="row" class="ah_table1">Addition date</th>
-                      {% if book.uploaded_by.id == request.session.id %}
-                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" name="addition_date" value="{{book.created_at}}" required></td>
-                      {% else %}
-                      <td class="ah_table2"><p>{{book.created_at}}</p></td>
-                      {% endif %}
-                    </tr>
-                    <tr>
                       <th scope="row" class="ah_table1">Location</th>
                       {% if book.uploaded_by.id == request.session.id %}
-                      <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" name="location" value="{{book.location}}" required></td>
+                      <td class="ah_table2">
+                          <select name="location" class="push-down w-100 ">
+                            <option selected value="{{ book.location }}">{{ book.location }}</option>
+                            <option value="Ramallah">Ramallah</option>
+                            <option value="Jerusalem">Jerusalem</option>
+                            <option value="Nablus">Nablus</option>
+                            <option value="Hebron">Hebron</option>
+                            <option value="Tulkarem">Tulkarem</option>
+                            <option value="Jericho">Jericho</option>
+                            <option value="Jenin">Jenin</option>
+                          </select>
+                      </td>
                       {% else %}
                       <td class="ah_table2"><p>{{book.location}}</p></td>
                       {% endif %}
@@ -304,11 +316,13 @@
                       <th scope="row" class="ah_table1">Categories</th>
                       {% if book.uploaded_by.id == request.session.id %}
                       <td class="ah_table2">
-                        <select name="category" class="push-down w-25">
+                        <select name="category" class="push-down w-100">
+                          <option selected value="{{ book.book_category.id }}">{{ book.book_category.name }}</option>
                           {% for category in all_categories %}
+                          
                           <option value="{{ category.id }}">{{ category.name }}</option>
                           {% endfor %}
-                          </select><br>
+                        </select><br>
                       </td>
                       {% else %}
                       <td class="ah_table2"><p>{{book.book_category.name}}</p></td>
@@ -327,11 +341,12 @@
                       <th scope="row" class="ah_table1">To be exchanged with</th>
                       {% if book.uploaded_by.id == request.session.id %}
                       <td class="ah_table2">
-                        <select name="bookCategory" class="push-down w-25">
+                        <select name="bookCategory" class="push-down w-100">
+                          <option selected value="{{ book.book_category.id }}">{{ book.book_category.name }}</option>
                           {% for category in all_categories %}
                           <option value="{{ category.id }}">{{ category.name }}</option>
                           {% endfor %}
-                          </select><br>
+                        </select><br>
                       </td>
                       {% else %}
                       <td class="ah_table2"><p>{{book.to_exchange_with.name}}</p></td>
@@ -342,16 +357,20 @@
                       {% if book.uploaded_by.id == request.session.id %}
                       <td class="ah_table2"><input type="text" class=" form-control" id="validationTooltip03" name="price" value="{{book.price}}" required></td>
                       {% else %}
-                      <td class="ah_table2"><p>{{book.price}}</p></td>
+                      <td class="ah_table2"><p>{{book.price}} (ILS)</p></td>
                       {% endif %}
+                    </tr>
+                    <tr>
+                      <th scope="row" class="ah_table1">Addition date</th>
+                      <td class="ah_table2"><p>{{book.created_at}}</p></td>
                     </tr>
                   </tbody>
                 </table>
                 <input style="display: none;" type="submit" value="Edit" class="btn btn-warning btn-sm ah_btn"id="exc_btn">
-
+                
                 {% if book.uploaded_by.id == request.session.id %}
-                  <input type="submit" value="Edit" class="btn btn-warning btn-sm ah_btn"id="exc_btn">
-
+                <input type="submit" value="Edit" class="btn btn-warning btn-sm ah_btn"id="exc_btn">
+                
                 {% endif %}
               </form>
             </div>
@@ -363,7 +382,7 @@
             </p>
             <div class="collapse" id="collapseExample">
               <div class="card card-body">
-              <form action="/books/exchange_book/{{book.id}}" method="POST">
+                <form action="/books/exchange_book/{{book.id}}" method="POST">
                 {% csrf_token %}
                   <select name="exchange">
                     {% for user_book in user.book_user.all %}
@@ -386,6 +405,7 @@
           </div>
          
       </div>
+  
       </div>
       
     </center>
