@@ -102,55 +102,62 @@
 <div class="wrapper">
   <!-- Sidebar  -->
   <nav id="sidebar">
-      <div class="sidebar-header">
-          <h3>Bookify</h3>
-      </div>
-
-      <ul class="list-unstyled components">
-          <p>Welcome User</p>
-          <li class="active">
-              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                  <li>
-                      <a href="#">Category 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 2</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 3</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 4</a>
-                  </li>
-                  <li>
-                      <a href="#">Category 5</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <a href="#">Your profile</a>
-          </li>
-        
-          <li>
-              <a href="#">About us</a>
-          </li>
-          <li class="active">
-            <a href="#contactSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Contact Us</a>
-            <ul class="collapse list-unstyled" id="contactSubmenu">
+    <div class="sidebar-header">
+      <a href="/books"><h3>Bookify</h3></a>
+    </div>
+    <ul class="list-unstyled components">
+        {% if 'id' in request.session %}
+        <div class="user-logo">
+          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <!-- we will change it to user image -->
+          <h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
+        </div>
+        {% else %}
+        <div class="user-logo">
+          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <!-- we will change it to user image -->
+          <h4>User Name (log in)</h4>
+        </div>
+        {% endif %}
+        <!-- DATA from DB just for testing -->
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    <p>Bookie@info.co</p>
-                    <p>+970599123123</p>
+                  {% for category in categories %}
+                    <a href="/books/category/{{category.id}}">{{category.name}}</a>
+                    {% endfor %}
                 </li>
             </ul>
-          </li>
-          <li>
-              <a href="#">Create an account</a>
-          </li>
-      </ul>
+        </li>
+        <li>
+            <a href="/books/user_page/{{request.session.id}}">Your profile</a>
+        </li>
+      
+        <li>
+            <a href="/books/about_us">About us</a>
+        </li>
+        <li class="active">
+          <a href="#contactSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Contact Us</a>
+          <ul class="collapse list-unstyled" id="contactSubmenu">
+              <li>
+                  <p>Bookie@info.co</p>
+                  <p>+970599123123</p>
+              </li>
+          </ul>
+        </li>
+        {% if 'id' not in request.session %}
+        <li>
+            <a href="#">Log in/Create an account</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="/logout">Logout</a>
+        </li>
+        {% endif %}
+    </ul>
 
-  </nav>
-
+</nav>
   
   <!-- Page Content  -->
   <div id="content">
@@ -195,7 +202,7 @@
           <button name="button" value="z-a" type="submit" class=" label btn btn-secondary"> Z - A </button>
       </form>
       <div class="d-flex flex-wrap books_main">
-        {% for book in current_category.book_cat.all %}
+        {% for book in books %}
         <div class="d-flex book_div" >
           <a href="#"> <img class="bookimg" src="{% static 'images/bg_1.jpg' %}" /> </a>
           <!-- <div class="height_dev">
