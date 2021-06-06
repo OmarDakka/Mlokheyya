@@ -33,5 +33,5 @@ If you clicked on any book in your library you'll have the ability to either:
 Authors:<br/>
 Adel Rimawi<br/>
 Ahmad Jury<br/>
-Omar Dakka<br/>
+Omar Daqah<br/>
 Tasneem Arafat<br/>
