@@ -62,7 +62,10 @@ def add_book(request):
 
 
 def about_us(request):
-    return render (request,'About_us.html')
+    context ={
+        'all_categories':models.get_all_categories()
+    }
+    return render (request,'About_us.html',context)
 
 def update_book_data(request,book_id):
     title=request.POST['title']

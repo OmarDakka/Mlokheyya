@@ -50,7 +50,7 @@
   <!-- Sidebar  -->
   <nav id="sidebar">
     <div class="sidebar-header">
-        <h3>Bookify</h3>
+        <a href="/books"><h3>Bookify</h3></a>
     </div>
     <ul class="list-unstyled components">
         {% if 'id' in request.session %}
@@ -78,11 +78,11 @@
             </ul>
         </li>
         <li>
-            <a href="user_page/{{request.session.id}}">Your profile</a>
+            <a href="/books/user_page/{{request.session.id}}">Your profile</a>
         </li>
       
         <li>
-            <a href="about_us">About us</a>
+            <a href="/books/about_us">About us</a>
         </li>
         <li class="active">
           <a href="#contactSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Contact Us</a>
@@ -96,6 +96,10 @@
         {% if 'id' not in request.session %}
         <li>
             <a href="#">Log in/Create an account</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="/logout">Logout</a>
         </li>
         {% endif %}
     </ul>
