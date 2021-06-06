@@ -52,13 +52,13 @@
     <ul class="list-unstyled components">
         {% if 'id' in request.session %}
         <div class="user-logo">
-          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <img src="{% static 'images/'%}{{request.session.first_name}} {{request.session.last_name}}.jpg" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
           <h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
         </div>
         {% else %}
         <div class="user-logo">
-          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
           <h4>GUEST</h4>
         </div>

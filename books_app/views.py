@@ -78,10 +78,9 @@ def add_book(request):
     location =  request.POST['location']
     book_category = models.Category.objects.get(id = request.POST['category'])
     price = request.POST['price']
-    image = request.POST['addPicture']
     uploaded_by = get_user_by_id(request.session['id'])
     to_exchange_with = models.Category.objects.get(id = request.POST['to_exchange'])
-    models.create_book(title,description,location,book_category,price,image,uploaded_by,to_exchange_with)
+    models.create_book(title,description,location,book_category,price,uploaded_by,to_exchange_with)
     return redirect(f"/books/user_page/{request.session['id']}")
 
 
@@ -131,6 +130,11 @@ def sort(request,category_id):
             context['books'] =  models.sort_a_z(category_id)
         
     return render(request,'Category.html', context)
+
+def delete_book(request,book_id):
+    models.delete_this_book(book_id)
+    user_id=request.session['id']
+    return redirect (f'/books/user_page/{user_id}')
 
 
 

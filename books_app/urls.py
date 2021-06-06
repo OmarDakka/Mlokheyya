@@ -1,7 +1,5 @@
 from re import search
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -16,8 +14,6 @@ urlpatterns = [
     path('buy_book/<int:book_id>',views.buy_book),
     path('exchange_book/<int:book_id>',views.exchange_book),
     path('category/sort/<int:category_id>', views.sort),
+    path('delete_book/<int:book_id>',views.delete_book),
 
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

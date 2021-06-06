@@ -9,7 +9,7 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     description = models.TextField()
-    image = models.ImageField(upload_to='images/' , default="default.jpg")
+    # image = models.TextField(default="default.jpg")
 
 
 class Book(models.Model):
@@ -18,7 +18,7 @@ class Book(models.Model):
     location = models.CharField(max_length=255)
     book_category = models.ForeignKey(Category,related_name="book_cat", default=None ,on_delete=CASCADE)
     price = models.IntegerField(default=None)
-    image = models.ImageField(upload_to='images/' , default="default.jpg")
+    # image = models.TextField(default="default.jpg")
     uploaded_by = models.ForeignKey(User,related_name="book_user",on_delete=CASCADE)
     to_exchange_with = models.ForeignKey(Category,related_name="exchange_category", default=None ,on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -51,8 +51,8 @@ def get_all_categories():
 def get_category_by_id(id):
     return Category.objects.get(id=id)
 
-def create_book(title,description,location,book_category,price,image,uploaded_by,to_exchange_with):
-    new_book = Book.objects.create(title=title,description=description,location=location,book_category=book_category,price=price,image=image,uploaded_by=uploaded_by,to_exchange_with=to_exchange_with)
+def create_book(title,description,location,book_category,price,uploaded_by,to_exchange_with):
+    new_book = Book.objects.create(title=title,description=description,location=location,book_category=book_category,price=price,uploaded_by=uploaded_by,to_exchange_with=to_exchange_with)
     return new_book
 
 def update_book(book_id,title,description,location,book_category,price,to_exchange_with): 
@@ -95,3 +95,7 @@ def exchange_book(seller, buyer, buyer_book, seller_book):
     seller_book.uploaded_by= buyer
     buyer_book.save()
     seller_book.save()
+
+def delete_this_book(book_id):
+    this_book = get_book_by_id(book_id)
+    this_book.delete()
