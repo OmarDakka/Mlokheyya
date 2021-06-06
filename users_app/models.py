@@ -15,10 +15,7 @@ class UserManager(models.Manager):
             errors['email'] = "Invalid email address!"
         if len(postData['password']) < 8:
             errors["password"] = "Password should be at least 8 characters"
-<<<<<<< HEAD
-=======
         
->>>>>>> 6bc578c0c84fb9ceb178db6dfb6d16aebcf2bc6a
         return errors
     
     def login_validator(self,postData):

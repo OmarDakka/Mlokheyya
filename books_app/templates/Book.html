@@ -12,8 +12,19 @@
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#book").autocomplete({
+            source: '{% url "home" %}'
+        })
+        });
+        
+    </script>
     <style>
        .push-down {
         margin-bottom: 10px;
@@ -189,7 +200,7 @@
         <div class="user-logo">
           <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
-          <h4>User Name (log in)</h4>
+          <h4>GUEST</h4>
         </div>
         {% endif %}
         <!-- DATA from DB just for testing -->
@@ -242,14 +253,12 @@
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
           </button>
-          <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="gg-menu"></i>
-          </button>
           <h2 class="bookify-color">Bookify</h2>
-           <div>
-                   <input type="search" class="search-width">
-                   <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
-           </div>
+          <form action="/books/search" method="POST">
+            {% csrf_token %}
+                   <input type="text" class="search-width" name="book" id="book" >
+                   <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
+           </form>
           
          
       <!-- </div> -->
