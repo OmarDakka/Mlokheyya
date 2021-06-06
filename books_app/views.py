@@ -1,13 +1,32 @@
+from re import template
 from django.http import request
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from . import models
 from users_app.models import User, get_user_by_id
+<<<<<<< HEAD
+=======
+from .models import Book
+
+>>>>>>> 7cdf9e105858f60bd8710ba8bc3bb94e184e4333
 # Create your views here.
-def index(request):
+def home(request):
+    if 'term' in request.GET:
+        qs =Book.objects.filter(title__istartswith=request.GET.get('term'))
+        titles = list()
+        for book in qs:
+            titles.append(book.title)
+        return JsonResponse(titles,safe=False)
+
     context ={
         'all_categories':models.get_all_categories()
     }
     return render (request,'home.html',context)
+
+def search(request):
+    book_id = Book.objects.filter(title = request.POST['book']).first().id
+    return redirect(f'book/{book_id}')
+
 
 def category(request, category_id):
     context = {
@@ -49,16 +68,23 @@ def user_page(request,user_id):
     }
     return render (request,'user_page.html',context)
 
+# def autocomplete(request):
+#     if 'term' in request.GET:
+#         qs = models.Book.objects.filter(title__istartwith=request.GET.get('term'))
+#         titles = list()
+#         for book in qs:
+#             titles.append(book.title)
+#         return JsonResponse(titles,safe=False)
+    
 def add_book(request):
     title = request.POST['bookTitle']
     description = request.POST['bookDescription']
     location =  request.POST['location']
     book_category = models.Category.objects.get(id = request.POST['category'])
     price = request.POST['price']
-    image = request.POST['addPicture']
     uploaded_by = get_user_by_id(request.session['id'])
     to_exchange_with = models.Category.objects.get(id = request.POST['to_exchange'])
-    models.create_book(title,description,location,book_category,price,image,uploaded_by,to_exchange_with)
+    models.create_book(title,description,location,book_category,price,uploaded_by,to_exchange_with)
     return redirect(f"/books/user_page/{request.session['id']}")
 
 
@@ -108,6 +134,11 @@ def sort(request,category_id):
             context['books'] =  models.sort_price(category_id)
         
     return render(request,'Category.html', context)
+
+def delete_book(request,book_id):
+    models.delete_this_book(book_id)
+    user_id=request.session['id']
+    return redirect (f'/books/user_page/{user_id}')
 
 
 

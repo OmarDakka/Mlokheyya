@@ -8,10 +8,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/search_js.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#book").autocomplete({
+            source: '{% url "home" %}'
+        })
+        });
+        
+    </script>
     <style>
       .push-down {
         margin-bottom: 10px;
@@ -42,15 +54,15 @@
       <ul class="list-unstyled components">
           {% if 'id' in request.session %}
 	  			<div class="user-logo">
-	  				<img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+	  				<img src="{% static 'images/'%}{{request.session.first_name}} {{request.session.last_name}}.jpg" width="250px" alt="profile pic">
             <!-- we will change it to user image -->
 	  				<h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
 	  			</div>
           {% else %}
           <div class="user-logo">
-	  				<img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+	  				<img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
             <!-- we will change it to user image -->
-	  				<h4>User Name (log in)</h4>
+	  				<h4>GUEST</h4>
 	  			</div>
           {% endif %}
           <!-- DATA from DB just for testing -->
@@ -64,10 +76,11 @@
                   </li>
               </ul>
           </li>
+          {% if 'id' in request.session %}
           <li>
               <a href="/books/user_page/{{request.session.id}}">Your profile</a>
           </li>
-        
+          {% endif %}
           <li>
               <a href="/books/about_us">About us</a>
           </li>
@@ -102,14 +115,12 @@
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
           </button>
-          <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="gg-menu"></i>
-          </button>
           <h2 class="bookify-color">Bookify</h2>
-           <div>
-                   <input type="search" class="search-width">
-                   <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
-           </div>
+           <form action="/books/search" method="POST">
+            {% csrf_token %}
+                   <input type="text" class="search-width" name="book" id="book" >
+                   <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
+           </form>
           
          
       <!-- </div> -->
@@ -150,7 +161,7 @@
         <div class="row">
           {% for category in all_categories %}
           <div class="column">
-            <a href="category/{{category.id}}"><img class="rounded" src="{{category.image.url}}" alt="Snow" style="width:100%"></a>
+            <a href="category/{{category.id}}"><img class="rounded" src="{% static 'images/' %}{{category.name}}.jpg" alt="Snow" style="width:100%"></a>
             <p class='hide'>{{category.name}}</p>
           </div>
           {% endfor %}

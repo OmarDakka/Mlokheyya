@@ -11,8 +11,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#book").autocomplete({
+            source: '{% url "home" %}'
+        })
+        });
+        
+    </script>
     <style>
       .push-down {
         margin-bottom: 10px;
@@ -39,9 +50,6 @@
        border-color: #6d7fcc;
       }
 
-      .search-width{
-        width: 150px;
-      }
     </style>
 </head>
   
@@ -55,15 +63,15 @@
     <ul class="list-unstyled components">
         {% if 'id' in request.session %}
         <div class="user-logo">
-          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <img src="{% static 'images/'%}{{request.session.first_name}} {{request.session.last_name}}.jpg" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
           <h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
         </div>
         {% else %}
         <div class="user-logo">
-          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
-          <h4>User Name (log in)</h4>
+          <h4>GUEST</h4>
         </div>
         {% endif %}
         <!-- DATA from DB just for testing -->
@@ -115,14 +123,12 @@
               <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
                 <i class="gg-menu"></i>
               </button>
-              <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="gg-menu"></i>
-              </button>
               <h2 class="bookify-color">Bookify</h2>
-               <div>
-                       <input type="search" class="search-width">
-                       <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
-               </div>
+              <form action="/books/search" method="POST">
+                {% csrf_token %}
+                       <input type="text" name="book" id="book" >
+                       <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
+               </form>
               
              
           <!-- </div> -->
@@ -140,8 +146,6 @@
           <center>
         <form action="/books/add_book" method="POST">
           {% csrf_token %}
-          <label for="addPicture" class="w-25">Add Picture</label>
-          <input type="file" name="addPicture" class="w-25"><br>
           <label for="bookTitle" class="w-25">Book Title</label>
           <input type="text" name="bookTitle" class="w-25 up"><br>
           <label for="category" class="w-25">Select a Category</label>
@@ -168,7 +172,7 @@
           </div><br>
           <div>
             <label for="price" class="pricing">Price</label>
-            <input type="number" name="price" class="w-25 pricing">
+            <input type="number" value=0 name="price" class="w-25 pricing">
           </div><br>
           <div>
             <label for="to_exchange" class="to_exchange">Category to exchange with</label>
@@ -195,14 +199,18 @@
         <div class="row">
           {% for book in user.book_user.all %}
           <div class="col-md-4 push-down">
-            <h3><strong>{{book.name}}</strong></h3>
+            <h3><strong>{{book.title}}</strong></h3>
             <br>
             <a href="#{{book.id}}" data-toggle="collapse">
-              <img src="/media/images/{{book.image}}" style="width: 150px; height: 200px;" class="img-responsive img-circle">
+              <img src="{% static 'images/' %}{{book.title}}.jpg" style="width: 150px; height: 200px;" class="img-responsive img-circle">
             </a>
             <div id="{{book.id}}" class="collapse">
               <p>{{book.description}}</p>
               <a href="/books/book/{{book.id}}" class="btn btn-md btn-primary button-color">EDIT</a>
+              <br>
+              <br>
+              <a href="/books/delete_book/{{book.id}}" class="btn btn-md btn-danger">DELETE</a>
+
             </div>
           </div>
           {% endfor %}

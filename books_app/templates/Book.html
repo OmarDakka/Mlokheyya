@@ -12,8 +12,19 @@
     <link href='https://css.gg/menu.css' rel='stylesheet'>
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#book").autocomplete({
+            source: '{% url "home" %}'
+        })
+        });
+        
+    </script>
     <style>
        .push-down {
         margin-bottom: 10px;
@@ -181,15 +192,15 @@
     <ul class="list-unstyled components">
         {% if 'id' in request.session %}
         <div class="user-logo">
-          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <img src="{% static 'images/'%}{{request.session.first_name}} {{request.session.last_name}}.jpg" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
           <h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
         </div>
         {% else %}
         <div class="user-logo">
-          <img src="{% static 'images/logo.jpg' %}" width="250px" alt="profile pic">
+          <img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
           <!-- we will change it to user image -->
-          <h4>User Name (log in)</h4>
+          <h4>GUEST</h4>
         </div>
         {% endif %}
         <!-- DATA from DB just for testing -->
@@ -242,14 +253,12 @@
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
           </button>
-          <button class="btn btn-dark d-inline-block d-lg-none ml-auto buttonStretch" type="button" style="background-color: #6d7fcc;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="gg-menu"></i>
-          </button>
           <h2 class="bookify-color">Bookify</h2>
-           <div>
-                   <input type="search" class="search-width">
-                   <button type="submit" class="btn btn-sm btn-primary button-color ">Search</button> 
-           </div>
+          <form action="/books/search" method="POST">
+            {% csrf_token %}
+                   <input type="text" class="search-width" name="book" id="book" >
+                   <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
+           </form>
           
          
       <!-- </div> -->
@@ -262,7 +271,7 @@
             <div class="ah-side">
               <h1>{{book.title}}</h1><br></br><br>
               <!-- later --adel  -->
-              <img class=" rounded ah-img" src="https://edit.org/images/cat/book-covers-big-2019101610.jpg" alt="image of book" width="40%" height="40%" class="d-inline-block align-top"><br></br><br>
+              <img class=" rounded ah-img" src="{% static 'images/' %}{{book.title}}.jpg" alt="image of book" width="40%" height="40%" class="d-inline-block align-top"><br></br><br>
             </div>
             <div class="ah_div">
            
@@ -317,7 +326,7 @@
                       {% endif %}
                     </tr>
                     <tr>
-                      <th scope="row" class="ah_table1">Added by</th>
+                      <th scope="row" class="ah_table1">Book Owner</th>
                       {% if book.uploaded_by.id == request.session.id %}
                       <td class="ah_table2"><input type="text" class="form-control" id="validationTooltip03" value="{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}" required></td>
                       {% else %}
