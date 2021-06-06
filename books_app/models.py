@@ -4,6 +4,23 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields import DateTimeField
 from users_app.models import User
 # Create your models here.
+
+class BookManager(models.Manager):
+    def basic_validator(self, postData):
+        errors = {}
+        if len(postData['bookTitle']) < 2:
+            errors["bookTitle"] = "Book name should be at least 5 characters"
+        if len(postData['bookDescription']) < 10:
+            errors["bookDescription"] = "Book description should be at least 10 characters"
+        return errors
+    def update_validator(self, postData):
+        errors = {}
+        if len(postData['title']) < 2:
+            errors["title"] = "Book name should be at least 5 characters"
+        if len(postData['description']) < 10:
+            errors["description"] = "Book description should be at least 10 characters"
+        return errors
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -25,6 +42,7 @@ class Book(models.Model):
     to_exchange_with = models.ForeignKey(Category,related_name="exchange_category", default=None ,on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects=BookManager()
 
 class Comment(models.Model):
     text = models.TextField()
@@ -97,16 +115,9 @@ def exchange_book(seller, buyer, buyer_book, seller_book):
     buyer_book.uploaded_by=seller
     seller_book.uploaded_by= buyer
     buyer_book.save()
-<<<<<<< HEAD
-    seller_book.save()
-=======
     seller_book.save()
 
 def delete_this_book(book_id):
     this_book = get_book_by_id(book_id)
     this_book.delete()
-<<<<<<< HEAD
 
-=======
->>>>>>> 7cdf9e105858f60bd8710ba8bc3bb94e184e4333
->>>>>>> acbab680cd552509311338a994142aaa409c52ee

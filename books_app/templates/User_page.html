@@ -24,33 +24,6 @@
         });
         
     </script>
-    <style>
-      .push-down {
-        margin-bottom: 10px;
-      }
-  
-      .background {
-        background-image: linear-gradient(#f09fb9 , #ecc8d3);
-      }
-
-      .buttonStretch {
-        height: 33px;
-      }
-
-      p { 
-        color: black;
-      }
-
-      .bookify-color {
-        color: #6d7fcc;
-      }
-      
-      .button-color {
-       background-color: #6d7fcc;
-       border-color: #6d7fcc;
-      }
-
-    </style>
 </head>
   
 <body>
@@ -64,13 +37,11 @@
         {% if 'id' in request.session %}
         <div class="user-logo">
           <img src="{% static 'images/'%}{{request.session.first_name}} {{request.session.last_name}}.jpg" width="250px" alt="profile pic">
-          <!-- we will change it to user image -->
           <h4>{{request.session.first_name}} {{request.session.last_name}}</h4>
         </div>
         {% else %}
         <div class="user-logo">
           <img src="{% static 'images/user.jpg' %}" width="250px" alt="profile pic">
-          <!-- we will change it to user image -->
           <h4>GUEST</h4>
         </div>
         {% endif %}
@@ -85,9 +56,11 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="/books/user_page/{{request.session.id}}">My profile</a>
-        </li>
+        {% if 'id' in request.session %}
+          <li>
+              <a href="/books/user_page/{{request.session.id}}">My profile</a>
+          </li>
+        {% endif %}
       
         <li>
             <a href="/books/about_us">About us</a>
@@ -118,9 +91,7 @@
   <div id="content">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-          <!-- <div class="d-flex justify-content-between"> -->
-
-              <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
+              <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch">
                 <i class="gg-menu"></i>
               </button>
               <h2 class="bookify-color">Bookify</h2>
@@ -129,18 +100,23 @@
                        <input type="text" name="book" id="book" >
                        <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
                </form>
-              
-             
-          <!-- </div> -->
       </nav>
       <div id="content" class="p-4 p-md-5 pt-5">
         <h2 class="mb-4">{{request.session.first_name}} {{request.session.last_name}}</h2>
       <center>
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>                {{msg.message}}
+        </div>
+        {% endfor %}
+      {% endif %}
       <p>
         <a class="btn btn-primary button-color w-50" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
           Add a New Book
         </a>
       </p>
+      <br>
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
           <center>
@@ -222,34 +198,6 @@
 
   </div>
 </div>
-<script>
-  
-
-  $(function(){
-    $('.selling').on('click',function(e){
-      $('.to_exchange').css('display','none');
-      $('.pricing').css('display','inline');
-      e.preventDefault();
-    });
-  });
-  $(function(){
-    $('.exchanged').on('click',function(e){
-      $('.pricing').css('display','none');
-      $('.to_exchange').css('display','inline');
-      e.preventDefault();
-    });
-  });
-  $(function(){
-    $('.bothing').on('click',function(e){
-      $('.pricing').css('display','inline');
-      $('.to_exchange').css('display','inline');
-      e.preventDefault();
-    });
-  });
-
-
- 
-</script>
 </body>
 
 </html>

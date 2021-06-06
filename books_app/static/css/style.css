@@ -255,3 +255,284 @@ a.article:hover {
         display: none;
     }
 }
+
+/* ---------------------------------------------------
+    Category Page
+----------------------------------------------------- */
+
+.catimg{
+    width: 20rem;
+    margin: 0px auto;
+    display: block;
+  }
+  .push-down {
+    margin-bottom: 10px;
+  }
+
+  .background {
+    background-image: linear-gradient(#f09fb9 , #ecc8d3);
+  }
+
+  .buttonStretch {
+    height: 33px;
+  }
+  
+p{
+    margin-bottom: 0rem;
+}
+.info_p{
+    height: 11%;
+    padding: 0.2rem;
+    color: black;
+}
+.last_p{
+    height: 67%;
+    color: black;
+
+}
+
+
+.book_div{
+    margin: 0.5rem 0px;
+    width: 34rem;
+    border: solid black 2px;
+
+}
+.label {
+  margin-bottom: 0rem;
+  display: inline-block;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 10%;
+  background-color: none;
+      }
+.sortingbar{
+  margin: 0.4rem auto;
+  display: flex;
+  justify-content: center;
+
+}
+.bookimg{
+  width: 12rem;
+  height: 20rem;
+
+}
+.book_info{
+  width: 22rem;
+}
+.books_main{
+  justify-content: space-between;
+  width: 85%;
+  margin: 0px auto;
+}
+
+.bookify-color {
+    color: #6d7fcc;
+  }
+  .info_label{
+    color: black;
+    font-weight: bold;
+  }
+
+/* ---------------------------------------------------
+    About US
+----------------------------------------------------- */
+
+  .bookify-color {
+    color: #6d7fcc;
+  }
+
+
+
+/* ---------------------------------------------------
+    Book Page
+----------------------------------------------------- */   
+  .area{
+    height: 30px;
+  }
+  .ah_table1{
+    width: 30%;
+    background-image: linear-gradient(to right,#b0b7d3,#d1ade6);
+    text-align: center;
+    font-size: medium;
+    border-radius: 10px
+  }
+  .ah_table2{
+    width: 80%;
+    background-image: linear-gradient(to right,#d1ade6,#e0cdd4);
+    border-radius: 10px;
+  }
+  .ah_table{
+    width: 100%;
+    border-radius: 10px
+    
+  }
+  .ah_div{
+    width: 60%;
+  }
+  .ah_box{
+    border: solid;
+    width: 50%;
+  }
+  .ah1{
+    height: 5rem;
+    padding: 1rem;
+    background-color: #5d5fd869;
+    border-radius: 10px;
+    border-width: 3px;
+ 
+  } 
+  .ah2{
+    height: auto;
+    padding: 1rem;
+    background-color: #e5f8f6;
+    border-radius: 10px;
+    border-width: 3px;
+  }
+  .ah4{
+    height: auto;
+    padding: 1rem;
+    border-radius: 10px;
+    border-width: 3px;
+  }
+  .ah3{
+    height: 10rem;
+    padding: 1rem;
+    width: auto;
+    background-color: #e5f8f6;
+    border-radius: 10px;
+    border-width: 3px;
+  }
+
+  .ah_in{
+     background-color: #5e1d0b;
+     width:auto;
+  }
+
+  .ah_left{
+    float: left;
+  }
+ 
+
+  .ah-flex{
+    
+    height: 10rem;
+  }
+  .ah-flex2{
+    display: flex;
+    justify-content: space-around;
+  
+    
+    
+  }
+  .ah-com{
+    padding: 1rem;
+  }
+  .ah-side{
+    height: auto;
+
+  }
+  .ah_comment{
+  width: 100%;
+  display: block;
+  }
+
+
+  .ah_btn{
+    width: 30%;
+    height: 3rem;
+    border: none;
+    background-color: #7386D5
+  }
+
+  .ah_btn:hover {background-color: #7386D5}
+
+  .ah_btn:active {
+    background-color: #7386D5;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  .ah_button{
+    width: 30%;
+    height: 3rem;
+    border: none;
+
+
+    background-color: #7386D5 ;
+    float: right;
+    
+  }
+  .ah_button:hover {background-color: #7386D5}
+
+  .ah_button:active {
+    background-color: #7386D5;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  .bookify-color {
+    color: #6d7fcc;
+  }
+  .ah_table2 p{
+    color: black;
+  }
+
+  /* ---------------------------------------------------
+    User Page
+----------------------------------------------------- */
+
+
+  .push-down {
+    margin-bottom: 10px;
+  }
+
+  .background {
+    background-image: linear-gradient(#f09fb9 , #ecc8d3);
+  }
+
+  .buttonStretch {
+    height: 33px;
+  }
+
+  p { 
+    color: black;
+  }
+
+  .bookify-color {
+    color: #6d7fcc;
+  }
+  
+  .button-color {
+   background-color: #6d7fcc;
+   border-color: #6d7fcc;
+  }
+
+
+
+  /* ---------------------------------------------------
+    Stitches
+----------------------------------------------------- */
+
+  .buttonStretch {
+    background-color: #6d7fcc;
+  }
+
+
+
+.our-images{
+    display: flex;
+    justify-content: space-around;
+}
+
+.each-images{
+      width:200px;
+      height:250px;
+      border: 2px solid #6d7fcc;
+}
+
+.our-images p{
+  text-align: center;
+  font-weight: bold;
+}

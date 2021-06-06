@@ -25,21 +25,7 @@
         
     </script>
     <style>
-      .push-down {
-        margin-bottom: 10px;
-      }
-  
-      .background {
-        background-image: linear-gradient(#f09fb9 , #ecc8d3);
-      }
 
-      .buttonStretch {
-        height: 33px;
-      }
-
-      .bookify-color {
-        color: #6d7fcc;
-      }
     </style>
 </head>
   
@@ -78,11 +64,7 @@
           </li>
           {% if 'id' in request.session %}
           <li>
-            {% if 'id' in request.session %}
               <a href="/books/user_page/{{request.session.id}}">My profile</a>
-            {% else %}
-            <a>My profile</a>
-            {% endif %}
           </li>
           {% endif %}
           <li>

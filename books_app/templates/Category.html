@@ -21,93 +21,7 @@
             source: '{% url "home" %}'
         })
         });
-        
     </script>
-    <style>
-      .catimg{
-        width: 20rem;
-        margin: 0px auto;
-        display: block;
-      }
-      .push-down {
-        margin-bottom: 10px;
-      }
-  
-      .background {
-        background-image: linear-gradient(#f09fb9 , #ecc8d3);
-      }
-
-      .buttonStretch {
-        height: 33px;
-      }
-      
-    p{
-        margin-bottom: 0rem;
-    }
-    .info_p{
-        height: 11%;
-        padding: 0.2rem;
-        color: black;
-    }
-    .last_p{
-        height: 67%;
-        color: black;
-
-    }
-
-
-    .book_div{
-        margin: 0.5rem 0px;
-        width: 34rem;
-        border: solid black 2px;
-
-    }
-    .label {
-      margin-bottom: 0rem;
-      display: inline-block;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      width: 10%;
-      background-color: none;
-          }
-    .sortingbar{
-      margin: 0.4rem auto;
-      display: flex;
-      justify-content: center;
-
-    }
-    .bookimg{
-      width: 12rem;
-      height: 20rem;
-
-    }
-    .book_info{
-      width: 22rem;
-    }
-    .books_main{
-      justify-content: space-between;
-      width: 85%;
-      margin: 0px auto;
-    }
-
-    .bookify-color {
-        color: #6d7fcc;
-      }
-      .info_label{
-        color: black;
-        font-weight: bold;
-      }
-      /* .height_dev{
-        height: 20rem;
-
-
-      } */
-    /* .method {
-      width: 6rem;
-      border-top: solid black 1px;
-    } */
-    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -141,9 +55,11 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="/books/user_page/{{request.session.id}}">My profile</a>
-        </li>
+        {% if 'id' in request.session %}
+          <li>
+              <a href="/books/user_page/{{request.session.id}}">My profile</a>
+          </li>
+        {% endif %}
       
         <li>
             <a href="/books/about_us">About us</a>
@@ -159,7 +75,7 @@
         </li>
         {% if 'id' not in request.session %}
         <li>
-            <a href="#">Log in/Create an account</a>
+            <a href="/">Log in/Create an account</a>
         </li>
         {% else %}
         <li>
@@ -174,7 +90,6 @@
   <div id="content">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-      <!-- <div class="d-flex justify-content-between"> -->
 
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
@@ -185,9 +100,6 @@
                    <input type="text" class="search-width" name="book" id="book" >
                    <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
            </form>
-          
-         
-      <!-- </div> -->
   </nav>
     
   <h3 style="text-align: center;">{{current_category.name}}</h3>
@@ -210,25 +122,23 @@
           <button name="button" value="a-z" type="submit" class="label btn btn-secondary"> A - Z </button>
           <button name="button" value="z-a" type="submit" class=" label btn btn-secondary"> Z - A </button>
       </form>
+      {% if 'id' not in request.session %}
+      <center>
+      <br>
+      <p><a style="color:red;" href="/"><strong>Please Log-In or Register to view books !</strong></a></p>
+      <br>
+    </center>
+      {% endif %}
       <div class="d-flex flex-wrap books_main">
         {% for book in books %}
         <div class="d-flex book_div" >
-<<<<<<< HEAD
-          <a href="/books/book/{{book.id}}"> <img class="bookimg" src="{% static 'images/bg_1.jpg' %}" /> </a>
-=======
-          <a href="#"> <img class="bookimg" src="{% static 'images/' %}{{book.title}}.jpg" /> </a>
->>>>>>> 7cdf9e105858f60bd8710ba8bc3bb94e184e4333
-          <!-- <div class="height_dev">
-
-        </div> -->
+          <a href="/books/book/{{book.id}}"> <img class="bookimg" src="{% static 'images/' %}{{book.title}}.jpg" /> </a>
             <div class="d-flex flex-column book_info">
                 <p class="p-2 info_p"><span class="info_label">Title:</span> {{book.title}}</p>
                 <p class="p-2 info_p" ><span class="info_label">Location:</span> {{book.location}} </p>
                 <p class="p-2 info_p" ><span class="info_label">Categories:</span> {{book.book_category.name}}</p>
                 <p class="p-2 info_p"><span class="info_label">Price:</span> {{book.price}} (ILS)</p>
                 <p class="p-2 last_p" ><span class="info_label">Description:</span><br> {{book.description}}</p>
-                <p class="p-2 last_p" ><span class="info_label">ID:</span><br> {{book.id}}</p>
-
             </div>
         </div>
         {% endfor%}

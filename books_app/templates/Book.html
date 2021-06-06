@@ -25,159 +25,7 @@
         });
         
     </script>
-    <style>
-       .push-down {
-        margin-bottom: 10px;
-      }
-  
-      .background {
-        background-image: linear-gradient(#f09fb9 , #ecc8d3);
-      }
-
-      .buttonStretch {
-        height: 33px;
-      }
-       
-      .area{
-        height: 30px;
-      }
-      .ah_table1{
-        width: 30%;
-        background-image: linear-gradient(to right,#b0b7d3,#d1ade6);
-        text-align: center;
-        font-size: medium;
-        border-radius: 10px
-      }
-      .ah_table2{
-        width: 80%;
-        background-image: linear-gradient(to right,#d1ade6,#e0cdd4);
-        border-radius: 10px;
-      }
-      .ah_table{
-        width: 100%;
-        border-radius: 10px
-        
-      }
-      .ah_div{
-        width: 60%;
-      }
-      .ah_box{
-        border: solid;
-        width: 50%;
-      }
-      .ah1{
-        height: 5rem;
-        padding: 1rem;
-        background-color: #5d5fd869;
-        border-radius: 10px;
-        border-width: 3px;
-        /* border-color: #e8a87c; */
-     
-      } 
-      .ah2{
-        height: auto;
-        padding: 1rem;
-        background-color: #e5f8f6;
-        border-radius: 10px;
-        border-width: 3px;
-        /* border-color: #d8ae92; */
-      }
-      .ah4{
-        height: auto;
-        padding: 1rem;
-        /* background-color: #d1ade6; */
-        border-radius: 10px;
-        border-width: 3px;
-        /* border-color: #d8ae92; */
-      }
-      .ah3{
-        height: 10rem;
-        padding: 1rem;
-        width: auto;
-        background-color: #e5f8f6;
-        border-radius: 10px;
-        border-width: 3px;
-        /* border-color: #f0bc9a; */
-      }
-
-      .ah_in{
-         background-color: #5e1d0b;
-         width:auto;
-      }
-
-      .ah_left{
-        float: left;
-      }
-     
-
-      .ah-flex{
-        
-        height: 10rem;
-      }
-      .ah-flex2{
-        display: flex;
-        justify-content: space-around;
-      
-        
-        
-      }
-      .ah-com{
-        padding: 1rem;
-      }
-      .ah-side{
-        height: auto;
-
-      }
-      .ah_comment{
-      width: 100%;
-      display: block;
-      }
-    
-
-      .ah_btn{
-        width: 30%;
-        height: 3rem;
-        border: none;
-        background-color: #7386D5
-      }
-
-      .ah_btn:hover {background-color: #7386D5}
-
-      .ah_btn:active {
-        background-color: #7386D5;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-      }
-
-      .ah_button{
-        width: 30%;
-        height: 3rem;
-        border: none;
-
-
-        background-color: #7386D5 ;
-        float: right;
-        
-      }
-      .ah_button:hover {background-color: #7386D5}
-
-      .ah_button:active {
-        background-color: #7386D5;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-      }
-
-      .bookify-color {
-        color: #6d7fcc;
-      }
-      .ah_table2 p{
-        color: black;
-      }
-      
-     
-    </style>
 </head>
-  
 <body>
 <div class="wrapper">
   <!-- Sidebar  -->
@@ -210,9 +58,11 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="/books/user_page/{{request.session.id}}">My profile</a>
-        </li>
+        {% if 'id' in request.session %}
+          <li>
+              <a href="/books/user_page/{{request.session.id}}">My profile</a>
+          </li>
+        {% endif %}
       
         <li>
             <a href="/books/about_us">About us</a>
@@ -244,7 +94,6 @@
   <div id="content">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-      <!-- <div class="d-flex justify-content-between"> -->
 
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
@@ -255,9 +104,7 @@
                    <input type="text" class="search-width" name="book" id="book" >
                    <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
            </form>
-          
-         
-      <!-- </div> -->
+
   </nav>
     
    
@@ -266,8 +113,7 @@
         <div class="ah-flex2">
             <div class="ah-side">
               <h1>{{book.title}}</h1><br></br><br>
-              <!-- later --adel  -->
-              <img class=" rounded ah-img" src="{% static 'images/' %}{{book.title}}.jpg" alt="image of book" width="40%" height="60%" class="d-inline-block align-top"><br></br><br>
+              <img class=" rounded ah-img" src="{% static 'images/' %}{{book.title}}.jpg" alt="image of book" width="40%" height="50%" class="d-inline-block align-top"><br></br><br>
             </div>
             <div class="ah_div">
            
@@ -342,7 +188,7 @@
                       {% if book.uploaded_by.id == request.session.id %}
                       <td class="ah_table2">
                         <select name="bookCategory" class="push-down w-100">
-                          <option selected value="{{ book.book_category.id }}">{{ book.book_category.name }}</option>
+                          <option selected value="{{ book.to_exchange_with.id }}">{{ book.to_exchange_with.name }}</option>
                           {% for category in all_categories %}
                           <option value="{{ category.id }}">{{ category.name }}</option>
                           {% endfor %}
@@ -373,6 +219,13 @@
                 
                 {% endif %}
               </form>
+              {% if messages %}
+                {% for msg in messages %}
+                  <div class="alert alert-info alert-dismissible" role="alert">
+                      <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>                {{msg.message}}
+                  </div>
+                {% endfor %}
+            {% endif %}
             </div>
             <div>
               {% if book.uploaded_by.id != request.session.id %}
@@ -397,6 +250,7 @@
                 </form>
                 </div>
                 </div>
+                <br>
               <a href="/books/buy_book/{{book.id}}" class="btn btn-warning btn-sm ah_btn"> Buy </a>
               {% endif %}
               
@@ -413,10 +267,6 @@
 
   </div>
 </div>
-<script>
-
- 
-</script>
 </body>
 
 </html>

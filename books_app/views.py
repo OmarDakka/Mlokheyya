@@ -4,11 +4,9 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from . import models
 from users_app.models import User, get_user_by_id
-<<<<<<< HEAD
-=======
 from .models import Book
+from django.contrib import messages
 
->>>>>>> 7cdf9e105858f60bd8710ba8bc3bb94e184e4333
 # Create your views here.
 def home(request):
     if 'term' in request.GET:
@@ -77,16 +75,21 @@ def user_page(request,user_id):
 #         return JsonResponse(titles,safe=False)
     
 def add_book(request):
-    title = request.POST['bookTitle']
-    description = request.POST['bookDescription']
-    location =  request.POST['location']
-    book_category = models.Category.objects.get(id = request.POST['category'])
-    price = request.POST['price']
-    uploaded_by = get_user_by_id(request.session['id'])
-    to_exchange_with = models.Category.objects.get(id = request.POST['to_exchange'])
-    models.create_book(title,description,location,book_category,price,uploaded_by,to_exchange_with)
-    return redirect(f"/books/user_page/{request.session['id']}")
-
+    errors = Book.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f"/books/user_page/{request.session['id']}")
+    else:
+        title = request.POST['bookTitle']
+        description = request.POST['bookDescription']
+        location =  request.POST['location']
+        book_category = models.Category.objects.get(id = request.POST['category'])
+        price = request.POST['price']
+        uploaded_by = get_user_by_id(request.session['id'])
+        to_exchange_with = models.Category.objects.get(id = request.POST['to_exchange'])
+        models.create_book(title,description,location,book_category,price,uploaded_by,to_exchange_with)
+        return redirect(f"/books/user_page/{request.session['id']}")
 
 def about_us(request):
     context ={
@@ -94,16 +97,22 @@ def about_us(request):
     }
     return render (request,'About_us.html',context)
 
-def update_book_data(request,book_id):
-    title=request.POST['title']
-    description=request.POST['description']
-    location=request.POST['location']
-    book_category = models.Category.objects.get(id = request.POST['category'])
-    price=request.POST['price']
-    to_exchange_with = models.Category.objects.get(id = request.POST['bookCategory'])
-    models.update_book(book_id,title,description,location,book_category,price,to_exchange_with)
-    return redirect(f'/books/book/{book_id}')
 
+def update_book_data(request,book_id):
+    errors = Book.objects.update_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/books/book/{book_id}')
+    else:
+        title=request.POST['title']
+        description=request.POST['description']
+        location=request.POST['location']
+        book_category = models.Category.objects.get(id = request.POST['category'])
+        price=request.POST['price']
+        to_exchange_with = models.Category.objects.get(id = request.POST['bookCategory'])
+        models.update_book(book_id,title,description,location,book_category,price,to_exchange_with)
+        return redirect(f'/books/book/{book_id}')
 def buy_book(request,book_id):
     models.update_owner(book_id,request.session['id'])
     return redirect(f'/books/book/{book_id}')

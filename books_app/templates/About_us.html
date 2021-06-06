@@ -23,23 +23,6 @@
         });
         
     </script>
-    <style>
-      .push-down {
-        margin-bottom: 10px;
-      }
-  
-      .background {
-        background-image: linear-gradient(#f09fb9 , #ecc8d3);
-      }
-
-      .buttonStretch {
-        height: 33px;
-      }
-
-      .bookify-color {
-        color: #6d7fcc;
-      }
-    </style>
 </head>
   
 <body>
@@ -74,13 +57,11 @@
                 </li>
             </ul>
         </li>
-        <li>
-          {% if 'id' in request.session %}
-          <a href="/books/user_page/{{request.session.id}}">My profile</a>
-        {% else %}
-        <a>My profile</a>
-        {% endif %}
-        </li>
+        {% if 'id' in request.session %}
+          <li>
+              <a href="/books/user_page/{{request.session.id}}">My profile</a>
+          </li>
+          {% endif %}
       
         <li>
             <a href="/books/about_us">About us</a>
@@ -112,7 +93,6 @@
   <div id="content">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-      <!-- <div class="d-flex justify-content-between"> -->
 
           <button type="button" id="sidebarCollapse" class="btn btn-info buttonStretch" style="background-color: #6d7fcc;">
             <i class="gg-menu"></i>
@@ -123,17 +103,9 @@
                    <input type="text" class="search-width" name="book" id="book" >
                    <button type="submit" class="btn btn-sm btn-primary button-color">Search</button> 
            </form>
-          
-         
-      <!-- </div> -->
+           
   </nav>
-    
-     <!-- <div
-		  class="img"
-		  style="
-			background-image: url('{% static 'images/ook2.jpeg' %}');
-			height: 400px;">
-		 </div> -->
+  
 		<div class='par'>
       <h4>About Us</h4>
       <p>Bookie was created to bring together those with love of the written word.</p>
@@ -155,11 +127,26 @@
       <br>
       <div class='par'>
         <h4>Our team</h4>
-        <p>Ahmad Jury</p>
-        <p>Adel Rimawi</p>
-        <p>Omar Dakkah</p>
-        <p>Tasneem Arafat</p>
+        <br>
+        <div class="our-images">
+        <div>
+          <img class="each-images" src="{% static 'images/Adel Rimawi.jpg' %}" alt="Adel">
+          <p>Adel Rimawi</p>
+        </div>
+        <div>
+          <img class="each-images" src="{% static 'images/Ahmad Jury.jpg' %}" alt="Ahmad">
+          <p>Ahmad Jury</p>
+        </div>
+        <div>
+          <img class="each-images" src="{% static 'images/Omar Daqah.jpg' %}" alt="Omar">
+          <p>Omar Daqah</p>
+        </div>
+        <div>
+          <img class="each-images" src="{% static 'images/Tasneem Arafat1.jpg' %}" alt="Tasneem">
+          <p>Tasneem Arafat</p>
+        </div>
       </div>
+    </div>
 
   </div>
 </div>
