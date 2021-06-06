@@ -15,7 +15,7 @@ If you choose a book, clicking on it will lead you to that **book page**, where 
 2. Exchange the book with another book from your list of books (depending on the book's owner preference on which category to exchange the book with).
 ![logo](https://user-images.githubusercontent.com/81506791/120929237-f16f8380-c6f0-11eb-8844-e0233e86e9c2.png)<br/>
 ![logo](https://user-images.githubusercontent.com/81506791/120929668-90e14600-c6f2-11eb-8f43-2ddf0364e1a1.png)<br/>
-**In your home page** you can view your library of books and add a new book.
+**In your home page** you can view your library of books and add a new book.<br/>
 If you clicked on any book in your library you'll have the ability to either:
 1. Edit the book's details (will lead you to the book's page and you can Edit and submit the changes).
 2. Delete the book.
