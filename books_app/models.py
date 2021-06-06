@@ -12,6 +12,8 @@ class Category(models.Model):
     image = models.ImageField(upload_to='images/' , default="default.jpg")
 
 
+
+
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -74,8 +76,9 @@ def update_owner(book_id,user_id):
 
 
 
-def get_by_location(location):
-    return Book.objects.filter(location = location)
+def get_by_location(location,category_id):
+    test= Category.objects.get(id=category_id)
+    return Book.objects.filter(location = location, book_category = test)
 
 
 def sort_a_z(category_id):

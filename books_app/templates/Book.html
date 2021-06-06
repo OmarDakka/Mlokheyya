@@ -344,7 +344,7 @@
                       {% if book.uploaded_by.id == request.session.id %}
                       <td class="ah_table2"><input type="text" class=" form-control" id="validationTooltip03" name="price" value="{{book.price}}" required></td>
                       {% else %}
-                      <td class="ah_table2"><p>{{book.price}}</p></td>
+                      <td class="ah_table2"><p>{{book.price}} (ILS)</p></td>
                       {% endif %}
                     </tr>
                   </tbody>

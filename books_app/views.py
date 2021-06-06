@@ -2,7 +2,6 @@ from django.http import request
 from django.shortcuts import redirect, render
 from . import models
 from users_app.models import User, get_user_by_id
-
 # Create your views here.
 def index(request):
     context ={
@@ -18,8 +17,9 @@ def category(request, category_id):
     }
     context['books'] = models.Book.objects.filter(book_category = context['current_category'])
     if request.method == 'POST':
-        location = request.post['location']
-        context['books'] = models.get_by_location(location)
+        if request.POST['button'] == 'location':
+            location = request.post['location']
+            context['books'] = models.get_by_location(location, category_id)
         if request.POST['button'] == "a-z":
             context['books'] =  models.sort_a_z()
         if request.POST['button'] == "z-a":
@@ -99,13 +99,13 @@ def sort(request,category_id):
     context['books'] = models.Book.objects.filter(book_category = models.get_category_by_id(category_id))
     if request.method == 'POST':
         location = request.POST['location']
-        context['books'] = models.get_by_location(location)
+        context['books'] = models.get_by_location(location,category_id)
         if request.POST['button'] == "a-z":
             context['books'] =  models.sort_a_z(category_id)
         if request.POST['button'] == "z-a":
             context['books'] =  models.sort_z_a(category_id)
         if request.POST['button'] == "price":
-            context['books'] =  models.sort_a_z(category_id)
+            context['books'] =  models.sort_price(category_id)
         
     return render(request,'Category.html', context)
 

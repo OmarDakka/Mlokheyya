@@ -185,7 +185,7 @@
   <img class="catimg" src="{{ current_category.image.url }}" />
       <form action="/books/category/sort/{{current_category.id}}" method="POST"  class="btn-group sortingbar" role="group" aria-label="Basic example">
         {% csrf_token %}
-          <label for="" class="label btn btn-secondary "> Sort by </label>
+          <label for="" class="label btn btn-secondary " > Sort by </label>
           <select name="location" class="label btn btn-secondary  " id="inlineFormCustomSelect">
             <option selected>Location</option>
             <option value="Ramallah">Ramallah</option>
@@ -196,15 +196,15 @@
             <option value="Jericho">Jericho</option>
             <option value="Jenin">Jenin</option>
         </select>
+          <button name="button" value="location" type="submit" class="label btn btn-secondary ">Select City </button>
           <button name="button" value="price" type="submit" class="label btn btn-secondary ">Price</button>
-
           <button name="button" value="a-z" type="submit" class="label btn btn-secondary"> A - Z </button>
           <button name="button" value="z-a" type="submit" class=" label btn btn-secondary"> Z - A </button>
       </form>
       <div class="d-flex flex-wrap books_main">
         {% for book in books %}
         <div class="d-flex book_div" >
-          <a href="#"> <img class="bookimg" src="{% static 'images/bg_1.jpg' %}" /> </a>
+          <a href="/books/book/{{book.id}}"> <img class="bookimg" src="{% static 'images/bg_1.jpg' %}" /> </a>
           <!-- <div class="height_dev">
 
         </div> -->
@@ -212,7 +212,10 @@
                 <p class="p-2 info_p"><span class="info_label">Title:</span> {{book.title}}</p>
                 <p class="p-2 info_p" ><span class="info_label">Location:</span> {{book.location}} </p>
                 <p class="p-2 info_p" ><span class="info_label">Categories:</span> {{book.book_category.name}}</p>
+                <p class="p-2 info_p"><span class="info_label">Price:</span> {{book.price}} (ILS)</p>
                 <p class="p-2 last_p" ><span class="info_label">Description:</span><br> {{book.description}}</p>
+                <p class="p-2 last_p" ><span class="info_label">ID:</span><br> {{book.id}}</p>
+
             </div>
         </div>
         {% endfor%}
