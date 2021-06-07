@@ -37,4 +37,4 @@ Omar Daqah<br/>
 Tasneem Arafat<br/>
 
 DEPLOYMENT LINK: <br/>
-3.17.177.191
+http://3.17.177.191/
